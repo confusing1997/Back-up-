@@ -1,0 +1,104 @@
+﻿@model IEnumerable<QLKS.Models.tblPhieuDatPhong>
+
+@{
+    ViewBag.Title = "XacNhanDatPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="">
+        <div class="col-md-12" style="background-color: #e6ebed; ">
+            <div class="">
+                    <h3>Thông tin đơn đặt phòng</h3>
+                <div class="panel-body">
+                    @using (Html.BeginForm("KetQuaDatPhong", "Home"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        if (ViewBag.ma_phong == null || ((String)ViewBag.ma_phong).Equals("[]"))
+                        {
+                            <div>Mời quý khách chọn phòng !</div>
+                        }
+                        else
+                        {
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <div class="form-group hidden">
+                                    @Html.Label("Username", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ma_kh", (String)ViewBag.ma_kh, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="font-size: 18px; color: black;">
+                                    @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ten_kh", (String)ViewBag.ten_kh, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group hidden" style="font-size: 18px; color: black;">
+                                    @Html.Label("Ngày đặt", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ngay_dat", (DateTime)ViewBag.ngay_dat, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="font-size: 18px; color: black;">
+                                    @Html.Label("Ngày vào", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ngay_vao", (String)ViewBag.ngay_vao, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="font-size: 18px; color: black;">
+                                    @Html.Label("Ngày ra", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ngay_ra", (String)ViewBag.ngay_ra, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group hidden">
+                                    @Html.Label("Mã phòng", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ma_phong", (String)ViewBag.ma_phong, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="font-size: 18px; color: black;">
+                                    @Html.Label("Số phòng", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-4">
+                                        @Html.TextBox("ten_phong", (String)ViewBag.so_phong, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div style="margin-left: 30%;">
+                                        <input type="submit" value="Đặt phòng" 
+                                               style="background-color: #bcc5f5; color: black; 
+                                                text-align: center; font-size: 22px;"/>
+                                        
+                                        <a href="@Url.Action("HuyDondatPhong", "Home")">
+                                            <span class="btn btn-default">Hủy</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div>
+                        @Html.ActionLink("Tìm phòng khác", "Index", null,
+                        new { @style = "background-color: #bcc5f5; color: black; text-align: center; font-size: 22px; " +
+                        "padding: 5px; border: 1px solid;" })
+                    </div>
+                </div>
+            </div>
+
+        </div> 
+
+        
+    </div>
+</div>

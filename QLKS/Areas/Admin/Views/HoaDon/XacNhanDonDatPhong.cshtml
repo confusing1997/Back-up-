@@ -1,0 +1,77 @@
+﻿@model QLKS.Models.tblPhieuDatPhong
+
+@{
+    ViewBag.Title = "XacNhanDonDatPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Xác nhận đơn đặt phòng của khách hàng</div>
+</div>
+
+<div>
+
+    @using (Html.BeginForm("KetQuaDatPhong", "HoaDon"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ma_pdp)
+        @Html.HiddenFor(model => model.ma_kh)
+        @Html.HiddenFor(model => model.ma_phong)
+
+        <div style="margin-top: 30px;" class="col-md-9">
+
+            <div class="col-md-6">
+
+
+                <div class="form-group">
+                    @Html.Label("Tên phòng đã đặt", htmlAttributes: new { @class = "control-label col-md-4", style = "font-weight: bold; font-size: 16px;" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(u => u.tblPhong.so_phong, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Họ tên khách hàng", htmlAttributes: new { @class = "control-label col-md-4", style = "font-weight: bold; font-size: 16px;" })
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(u => u.tblKhachHang.ho_ten, null, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group hidden">
+                    @Html.Label("Thời gian đặt phòng", htmlAttributes: new { @class = "control-label col-md-4", style = "font-weight: bold; font-size: 16px;" })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(u => u.ngay_dat, null, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Thời gian nhận phòng", htmlAttributes: new
+                    {
+                        @class = "control-label col-md-6",
+                        style = "font-weight: bold; font-size: 16px;"
+                    })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(u => u.ngay_vao, null, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Thời gian trả phòng", htmlAttributes: new
+                    {
+                        @class = "control-label col-md-4",
+                        style = "font-weight: bold; font-size: 16px;"
+                    })
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(u => u.ngay_ra, null, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div>
+                    <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        }
+</div>

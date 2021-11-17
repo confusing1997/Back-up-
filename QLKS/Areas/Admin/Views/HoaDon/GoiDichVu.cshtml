@@ -1,0 +1,153 @@
+﻿@using QLKS.Models
+@model GoiDichVuModel
+@{
+    ViewBag.Title = "Gọi dịch vụ";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Gọi dịch vụ</div>
+</div>
+
+<div class="col-md-12">
+        <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mô tả</th>
+                    <th>
+                        Tên dịch vụ
+                    </th>
+                    <th>
+                        Giá
+                    </th>
+                    <th>
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ 
+                    int stt = 0;
+                }
+                @foreach (var item in Model.dsDichVu)
+                {
+                    stt++;
+                <tr>
+                    <td>@stt</td>
+                    <td>
+                        <img src="@Html.DisplayFor(modelItem => item.anh)" width="50px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ten_dv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gia)
+                    </td>
+                    <td>
+                        <a href="#"
+                           data-toggle="modal" 
+                           onclick="chonDo(@item.ma_dv,@item.ton_kho)" 
+                            data-target="#popup">
+                            Gọi đồ
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal" id="popup"
+             aria-hidden="true" style="margin-top: 15%;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    @using (@Html.BeginForm("XacNhanGoiDichVu", "HoaDon"))
+                    {
+                        <div class="modal-header">
+                            <h5 class="modal-title">Số lượng khách gọi</h5>
+                            <button type="button" data-dismiss="modal">
+                                <span aria-hidden="true" style="color: red;">X</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            @Html.TextBox("ma_hd", (int)ViewBag.ma_hd, new { @class = "form-control", style = "display:none" })
+                            @Html.TextBox("ma_dv", null, new { @class = "form-control", @style = "display:none" })
+                            @Html.TextBox("so_luong", 1, new { @class = "form-control", @type = "number", style = "width:50%" })
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" onclick="return checkDV()">Xác nhận</button>
+                            <button class="btn btn-default" type="button" data-dismiss="modal">Hủy</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div style="background-color: #b1c3f0;">
+        Món ăn đã đặt
+    </div>
+                
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Tên đồ
+                    </th>
+                                
+                    <th>
+                        Số lượng phục vụ
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.dsDvDaDat)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblDichVu.ten_dv)
+                        </td>
+                                   
+                        <td>
+                            @Html.DisplayFor(modelItem => item.so_luong)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    var hang = 0;
+    function chonDo(ma_dv, tk) {
+        var maDV = $('#ma_dv');
+        maDV.val(ma_dv);
+        hang = tk;
+    }
+    
+    function checkDV() {
+        var soLuong = document.getElementById("so_luong").value;
+        if (soLuong % 1 === 0 && soLuong >= 0) {
+        } else {
+            alert("Mời bạn nhập lại !");
+            return false;
+        }
+        if (soLuong > hang) {
+            alert("Số lượng nhập lớn hơn số lượng hàng !");
+            return false;
+        }
+        return true;
+    }
+    
+</script>
+
+

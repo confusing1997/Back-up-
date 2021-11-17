@@ -1,0 +1,297 @@
+﻿
+@model IEnumerable<QLKS.Models.tblPhong>
+
+@{
+    ViewBag.Title = "TimPhongTrong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .img {
+        width: 100px;
+        height: 75px;
+        background-position: center center;
+        background-size: cover;
+    }
+</style>
+
+
+<div class="col-md-3" style="background-color: #f5f7f5; margin-left: 30px;">
+
+    @using (Html.BeginForm("TimPhongTrong", "Home"))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="date_start" style="font-size: 22px;">Ngày vào</label>
+                    @Html.TextBox("datestart", null, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <label for="date_end" style="font-size: 22px;">Ngày ra</label>
+                    @Html.TextBox("dateend", null, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit"
+                        onclick="return checkday()"
+                        style="background-color: #bcc5f5; color: black; text-align: center;">
+                    Tìm
+                </button>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("XacNhanDatPhong","Home")"
+                   style="background-color: #bcc5f5; color: black; text-align: center; border: 1px solid; padding: 10px;"
+                   onclick="return checkChonPhong()">
+                    Xác nhận
+                </a>
+
+            </div>
+
+        </div>
+    }
+</div>
+<hr />
+<div class="col-md-12" style="background-color: #f5f7f5; margin-top: 10px;">
+
+    <div class="col-md-4">
+        <h3>Tầng trệt</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th style="text-align: center; font-size: 20px;">
+                    Tên phòng
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Số giường
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Vị trí
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Đơn giá
+                </th>
+                <th width="100px" style="text-align: center; font-size: 20px;">
+                    Thao tác
+                </th>
+            </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.so_phong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.gia) VNĐ
+                        </td>
+                        <td>
+                            <button id="btn_@item.ma_phong"
+                                    class="btn btn-info"
+                                    onclick="btnClick(@item.ma_phong)">
+                                Đặt phòng
+                            </button>
+
+                        </td>
+                    </tr>
+                
+            }
+
+        </table>
+    </div>
+
+
+
+    <div class="col-md-4">
+        <h3>Tầng 1</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th style="text-align: center; font-size: 20px;">
+                    Tên phòng
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Số giường
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Vị trí
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Đơn giá
+                </th>
+                <th width="100px" style="text-align: center; font-size: 20px;">
+                    Thao tác
+                </th>
+            </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                if (item.ma_tinh_trang == 1 && item.tblPhieuDatPhongs.Where(a => (a.ma_tinh_trang != 1 && a.ma_tinh_trang != 2)) != null && item.tblTang.ma_tang == 2)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.so_phong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.gia) VNĐ
+                        </td>
+                        <td>
+                            <button id="btn_@item.ma_phong"
+                                    class="btn btn-info"
+                                    onclick="btnClick(@item.ma_phong)">
+                                Đặt phòng
+                            </button>
+
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+
+
+    <div class="col-md-4">
+        <h3>Tầng 2</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th style="text-align: center; font-size: 20px;">
+                    Tên phòng
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Số giường
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Vị trí
+                </th>
+                <th style="text-align: center; font-size: 20px;">
+                    Đơn giá
+                </th>
+                <th width="100px" style="text-align: center; font-size: 20px;">
+                    Thao tác
+                </th>
+            </tr>
+
+
+
+            @foreach (var item in Model)
+            {
+                if (item.ma_tinh_trang == 1 && item.tblPhieuDatPhongs.Where(a => (a.ma_tinh_trang != 1 && a.ma_tinh_trang != 2)) != null && item.tblTang.ma_tang == 3)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.so_phong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.gia) VNĐ
+                        </td>
+                        <td>
+                            <button id="btn_@item.ma_phong"
+                                    class="btn btn-info"
+                                    onclick="btnClick(@item.ma_phong)">
+                                Đặt phòng
+                            </button>
+
+                        </td>
+                    </tr>
+                }
+            }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    function btnClick(id) {
+        var btn = $('#btn_' + id);
+        if (btn.html() == "Đặt phòng") {
+            $.ajax({
+                url: '/Home/ChonPhong/' + id,
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (data) {
+                    if (data.trim() == 'success') {
+                        btn.removeClass('btn-info').addClass('btn-danger');
+                        $('#btn_' + id).html('Huỷ đặt');
+                    }
+                }
+            });
+        } else {
+            $.ajax({
+                url: '/Home/HuyChon/' + id,
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (data) {
+                    if (data.trim() == 'success') {
+                        btn.removeClass('btn-danger').addClass('btn-info');
+                        $('#btn_' + id).html('Đặt phòng');
+                    }
+                }
+            });
+        }
+    }
+    function checkChonPhong() {
+        var li = document.getElementsByClassName('btn-danger');
+        if (li.length == 0) {
+            return false;
+        }
+        return true;
+    }
+</script>
+<script>
+    function checkday() {
+        var from1 = $("#datestart").val().split("/");
+        var dateS = new Date(from1[2], from1[1] - 1, from1[0]);
+        var from2 = $("#dateend").val().split("/");
+        var dateE = new Date(from2[2], from2[1] - 1, from2[0]);
+
+        var now = new Date();
+        now.setHours(0);
+        now.setSeconds(0);
+        now.setMinutes(0);
+        now.setMilliseconds(0);
+
+        if (dateS < now) {
+            alert("Mời quý khách nhập ngày vào lớn hơn hoặc bằng ngày hiện tại !");
+            return false;
+        }
+        if (dateE <= dateS) {
+            alert("Ngày ra phải lớn hơn ngày vào ít nhất 1 ngày !");
+            return false;
+        }
+        if (from1 == "" || from2 == "") {
+            alert("Ngày tháng không được để trống !");
+            return false;
+        }
+        return true;
+    }
+</script>

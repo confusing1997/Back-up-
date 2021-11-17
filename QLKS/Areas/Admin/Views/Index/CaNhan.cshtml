@@ -1,0 +1,127 @@
+﻿@model QLKS.Models.tblNhanVien
+
+@{
+    ViewBag.Title = "Thông tin cá nhân";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div style="margin-left: 10px; font-size: 18px;">Đổi mật khẩu</div>
+</div>
+
+<div style="margin-top: 20px;">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ma_nv)
+
+                <div class="form-group hidden">
+                    @Html.LabelFor(model => model.ma_chuc_vu, "ma_chuc_vu", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ma_chuc_vu", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ma_chuc_vu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Họ và tên nhân viên", htmlAttributes: new { @class = "control-label col-md-2", 
+                    style="font-weight: bold; font-size: 18px;" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ho_ten, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ho_ten, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Ngày tháng năm sinh", htmlAttributes: new { @class = "control-label col-md-2",
+                    style="font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ngay_sinh, new { htmlAttributes = new { type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ngay_sinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Địa chỉ", htmlAttributes: new { @class = "control-label col-md-2",
+                    style = "font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.dia_chi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.dia_chi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Số điện thoại", htmlAttributes: new { @class = "control-label col-md-2",
+                    style = "font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.sdt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sdt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Tên người dùng", htmlAttributes: new { @class = "control-label col-md-2",
+                    style = "font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tai_khoan, 
+                        new { htmlAttributes = new { @class = "form-control", @readonly="readonly"} })
+                        @Html.ValidationMessageFor(model => model.tai_khoan, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Mật khẩu", htmlAttributes: new { @class = "control-label col-md-2",
+                    style = "font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.mat_khau, 
+                        new { htmlAttributes = new { @class = "form-control", id = "user_password", type="password" } })
+                        @Html.ValidationMessageFor(model => model.mat_khau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Xác nhân mật khẩu", htmlAttributes: new { @class = "control-label col-md-2",
+                    style = "font-weight: bold; font-size: 18px;"})
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.mat_khau, 
+                        new { htmlAttributes = new { @class = "form-control", id = "user_confirm_password", type="password" } })
+                        @Html.ValidationMessageFor(model => model.mat_khau, "", new { @class = "text-danger", id="confirm_mat_khau" })
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Xác nhận" class="btn btn-primary" onclick="return checkInfo();"/>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+<script>
+    function checkInfo() {
+        var hoTen = $("#ho_ten").val();
+        var date = $("#ngay_sinh").val();
+        var address = $("#dia_chi").val();
+        var phone = $("#sdt").val();
+        var acc = $("#tai_khoan").val();
+        var psw = $("#user_password").val();
+        var confirmPsw = $("#user_confirm_password").val();
+
+        if (hoTen == "" || date == "" || address == "" || phone == "" || acc == "" || psw == "" || confirmPsw == "") {
+            return false;
+        }
+
+        if (psw != confirmPsw) {
+            return false;
+        }
+
+    }
+</script>
+

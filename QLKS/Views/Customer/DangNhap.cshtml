@@ -1,0 +1,70 @@
+﻿@model QLKS.Models.tblKhachHang
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <link href="~/Content/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Admin/css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body style="background-image: url('/Content/Home/images/Logo/background.jpg')">
+    <div class="container">
+        <div class="card card-login mx-auto mt-5">
+            <h5 style="margin-left: 10px;">Đăng ký tài khoản</h5>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="exampleInputEmail1" style="font-size: 20px; font-weight: bold;">Tên đăng nhập</label>
+                        @Html.TextBoxFor(u => u.ma_kh, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.ma_kh)
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" style="font-size: 20px; font-weight: bold;">Mật khẩu</label>
+                        @Html.PasswordFor(u => u.mat_khau, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.mat_khau)
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Đăng nhập" style="margin-left: 30%;"/>
+                }
+                <br />
+                <div>
+                    Hoặc mời quý khách đăng ký tài khoản
+                </div>
+
+                <a href="@Url.Action("DangKyTaiKhoan", "Customer")">
+                    <input class="btn btn-success" value="Đăng ký" style="margin-left: 20%; margin-top: 5px;"/>
+                </a>
+                <div style="margin-top: 5px;">
+                    <a href="@Url.Action("Index","Home")" style="font-weight: bold; color: #4984e3; ">Trang chủ</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script src="~/Content/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+<script>
+    /*var a = $("#ma_kh").val();
+    if (a == "") {
+        alert("khong dc de trong");
+    }*/
+</script>
+</html>

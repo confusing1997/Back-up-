@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "KetQuaDatPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Xác nhận đơn đặt phòng của khách hàng</div>
+</div>
+@{ 
+    if (ViewBag.result == "success")
+    {
+        <div>
+            <h2>Đã xác nhận đơn đặt phòng của khách hàng.</h2>
+        </div>
+        <div>
+            <h3>Gọi cho khách để thông báo thời gian nhận phòng</h3>
+        </div> 
+    } 
+}
+
+

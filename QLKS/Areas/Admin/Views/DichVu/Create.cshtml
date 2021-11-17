@@ -1,0 +1,93 @@
+﻿@model QLKS.Models.tblDichVu
+
+@{
+    ViewBag.Title = "Thêm dịch vụ";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Thêm một món ăn</div>
+</div>
+
+<div style="margin-top: 20px;">
+    @using (Html.BeginForm("Create", "DichVu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Tên món ăn", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ten_dv, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ten_dv, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Đơn giá", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.gia, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                            @Html.ValidationMessageFor(model => model.gia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Đơn vị tính", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.don_vi, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.don_vi, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Số lượng có thể phục vụ", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ton_kho, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                            @Html.ValidationMessageFor(model => model.ton_kho, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            <input type="file" name="file" id="file" class="form-control" style="width: 100%;" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="submit" onclick="return checkInfo()" value="Xác nhận" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            }
+</div>
+
+
+<script>
+    function checkInfo() {
+
+        var ten = $('#ten_dv').val();
+        var gia = $('#gia').val();
+        var soluong = $('#ton_kho').val();
+        var donvi = $('#don_vi').val();
+
+        if (ten == '') {
+            alert('Tên món ăn không được để trống !');
+            return false;
+        }
+        if (gia == '') {
+            alert('Đơn giá không được để trống !');
+            return false;
+        if (donvi == '') {
+            alert('Đơn ví tính không được để trống !');
+            return false;
+        }
+        if (soluong == '') {
+            alert('Số lượng có thể phục vụ không được để trống !');
+            return false;
+        }
+        return true;
+    }
+</script>

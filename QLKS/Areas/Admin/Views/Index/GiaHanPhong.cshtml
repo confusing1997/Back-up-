@@ -1,0 +1,68 @@
+﻿@model QLKS.Models.tblPhieuDatPhong
+
+@{
+    ViewBag.Title = "GiaHanPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Gia hạn phòng</div>
+</div>
+<div>
+    <div>Ngày khách trả phòng hiện tại: @Model.ngay_ra</div>
+    <div>
+        @using (Html.BeginForm("GianHanThanhCong", "Index"))
+        {
+            
+            
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ma_pdp)
+            <div style="margin-top: 50px;">
+                <div class="col-md-3">
+                    <label for="date_start">Ngày khách nhận phòng</label>
+                    @Html.TextBoxFor(m => m.ngay_vao, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                
+                <div class="col-md-3" style="margin-top: 15px;">
+                    <label for="date_end">Ngày khách muốn gia hạn</label>
+                    @Html.TextBoxFor(m => m.ngay_ra, new { @type = "date", @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" style="margin-top: 40px;" onclick="return checkGH()" value="Gia hạn phòng">
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function checkGH() {
+        var ngay_vao = $("#ngay_vao").val();
+        var ngayVao = new Date(ngay_vao);
+
+        var ngay_ra = $("#ngay_ra").val();
+        var ngayRa = new Date(ngay_ra);
+
+        
+
+        var now = new Date();
+        now.setHours(0);
+        now.setSeconds(0);
+        now.setMinutes(0);
+        now.setMilliseconds(0);
+
+        if (ngayRa <= ngayVao) {
+            return false;
+        }
+        if (ngayRa < now) {
+            return false;
+        }
+
+        if (ngay_ra == "") {
+            alert("Dữ liệu không được để trống!");
+            return false;
+        }
+        return true;
+    }
+</script>
+

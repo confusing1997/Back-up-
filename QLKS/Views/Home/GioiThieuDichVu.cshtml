@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QLKS.Models.tblPhong>
+
+@{
+    ViewBag.Title = "GioiThieuDichVu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <h2 style="background-color: #b1c3f0;">Danh sách phòng của khách sạn Lê An</h2>
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>STT</th>
+            <th>Mô tả</th>
+            <th>Tên phòng</th>
+            <th>
+                Số giường
+            </th>
+            <th>
+                Vị trí
+            </th>
+            
+            
+        </tr>
+        @{ 
+            int stt = 0;
+        }
+        @foreach (var item in Model)
+        {
+            stt++;
+            <tr>
+                <td>
+                    @stt
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelitem => item.tblLoaiPhong.anh)" width="100px;"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.so_phong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                </td>
+                
+                
+            </tr>
+        }
+
+    </table>
+</div>

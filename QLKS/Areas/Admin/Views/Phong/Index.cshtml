@@ -1,0 +1,63 @@
+﻿@model IEnumerable<QLKS.Models.tblPhong>
+
+@{
+    ViewBag.Title = "Danh sách phòng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Danh sách phòng</div>
+</div>
+
+
+
+<div>
+    
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mô tả</th>
+                        <th>
+                            Tên phòng
+                        </th>
+                        <th>
+                            Số giường
+                        </th>
+                        <th>
+                            Vị trí
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        int stt = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        stt++;
+                        <tr>
+                            <td>
+                                @stt
+                            </td>
+                            <td>
+                                <img src="@Html.DisplayFor(modelItem => item.tblLoaiPhong.anh)" width="80px" height="50px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.so_phong)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+

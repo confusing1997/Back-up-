@@ -1,0 +1,58 @@
+﻿@model IEnumerable<QLKS.Models.tblPhieuDatPhong>
+
+@{
+    ViewBag.Title = "DonDatPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Đơn đặt phòng hôm nay</div>
+</div>
+
+<div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Khách hàng
+                    </th>
+                    <th>
+                        Thời gian đặt phòng
+                    </th>
+                    
+                    <th>
+                        Số phòng
+                    </th>
+                    <th>
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblKhachHang.ho_ten)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ngay_dat)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblPhong.so_phong)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-primary" 
+                            href="@Url.Action("XacNhanDonDatPhong", "HoaDon", new { id = item.ma_pdp })">Xem thông tin</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.title</title>
+
+    <link href="~/Content/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    <link href="~/Content/Admin/css/sb-admin.css" rel="stylesheet">
+    <link href="~/Content/Site.css" rel="stylesheet">
+</head>
+<style>
+    a:hover {
+        background-color: #87bbe6;
+    }
+</style>
+
+<body>
+    @{
+        if (Session["NV"] == null)
+        {
+            Response.Redirect("~/Admin/Index/Login");
+        }
+    }
+    <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav" style="background-color: #a9b2ba;">
+
+            @{if (Session["NV"] != null)
+                {
+                    QLKS.Models.tblNhanVien nv = (QLKS.Models.tblNhanVien)Session["NV"];
+
+                    <a href="#" class="nav-link" style="font-size: 18px;">
+                        <p style="color: #121211; font-weight: bold; font-size: 18px;">Tên nhân viên: @nv.ho_ten</p>
+                    </a>
+                                
+                }
+            }
+
+            <div class="collapse navbar-collapse">
+
+                <ul class="navbar-nav navbar-sidenav" style="background-color: #686b6b; height: 700px;">
+                    
+
+                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 3)
+                    {
+                        <p style="font-size: 18px; color: #e4ecf0; font-weight: bold; margin: 5px;">Báo cáo thống kê</p>
+
+                        <a class="nav-link" href="@Url.Action("Index", "HoaDon")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid;">
+                            Hóa đơn hệ thống   
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "PhieuDatPhong")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Danh sách đơn đặt phòng
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Hiện trạng phòng
+                        </a>
+
+                        <p style="font-size: 18px; color: #e4ecf0; font-weight: bold; margin: 5px;">Con người</p>
+                        
+                        <a class="nav-link" href="@Url.Action("Index", "NhanVien")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Nhân viên
+                        </a>
+                        
+                        <a class="nav-link" href="@Url.Action("Index", "KhachHang")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Khách hàng trên hệ thống
+                        </a>
+
+                    }
+                        
+
+                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 3)
+                    {
+
+                        <a class="nav-link" href="@Url.Action("Index", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Hiện trạng phòng
+                        </a>
+                        
+                        <a class="nav-link" href="@Url.Action("DonDatPhong", "PhieuDatPhong")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Đơn đặt phòng
+                        </a>
+                        
+                        <a class="nav-link" href="@Url.Action("PhongCoTheThanhToan", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Thanh toán hóa đơn
+                        </a>
+                        
+                        <a class="nav-link" href="@Url.Action("PhongCoThePhucVu", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Phục vụ phòng
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("PhongCoTheGiaHan", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Gia hạn phòng
+                        </a>
+                    }
+
+                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 1)
+                    {
+                        <p style="font-size: 18px; color: #e4ecf0; font-weight: bold; margin: 5px;">Cơ sở vật chất</p>
+
+                        <a class="nav-link" href="@Url.Action("Index", "DichVu")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Phục vụ
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "Phong")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Danh sách phòng
+                        </a>
+
+                        <a class="nav-link" href="@Url.Action("Index", "LoaiPhong")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Loại Phòng
+                        </a>
+                        
+                        <a class="nav-link" href="@Url.Action("Index", "Tang")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Vị trí
+                        </a>
+                    }
+
+                    
+                </ul>
+                
+                <ul class="navbar-nav ml-auto">
+                    
+                    @{if (Session["NV"] != null)
+                        {
+                            QLKS.Models.tblNhanVien nv = (QLKS.Models.tblNhanVien)Session["NV"];
+
+                            <a style="margin-left: 15px; font-size: 18px;" class="nav-link" href="@Url.Action("CaNhan","Index")">
+                                <p style="color: #121211; font-weight: bold; font-size: 18px;">Đổi mật khẩu</p>                             
+                            </a>
+
+                            <a onclick="return confirm('Bạn muốn đăng xuất?');" style="margin-left: 15px; font-size: 18px;" class="nav-link" href="@Url.Action("Logout","Index")">
+                                <p style="color: #121211; font-weight: bold; font-size: 18px;">Đăng xuất</p>
+                            </a>
+                        }
+                    }
+                </ul>
+            </div>
+        </nav>
+
+    <div class="content-wrapper">
+        
+            @RenderBody()
+        
+    </div>
+
+        <footer class="col-md-12" style="background-color: #dae4ed; height: 30px;">
+            <div class="text-center" >
+                Lê An Hotel 2021
+            </div>
+        </footer>
+        
+        <script src="~/Content/Admin/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Content/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Content/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="~/Content/Admin/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="~/Content/Admin/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="~/Content/Admin/js/sb-admin.min.js"></script>
+        <script src="~/Content/Admin/js/sb-admin-datatables.min.js"></script>
+</body>
+
+</html>

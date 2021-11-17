@@ -1,0 +1,60 @@
+﻿@model IEnumerable<QLKS.Models.tblKhachHang>
+
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Danh sách khách hàng</div>
+</div>
+
+
+
+<div>
+    
+    <div>
+        <div>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        @Html.DisplayName("Họ tên")
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayName("Số ĐT")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Email")
+                    </th>
+                </tr>
+
+                @{ 
+                    int stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    <tr>
+                        <td>
+                            @stt
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ho_ten)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sdt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mail)
+                        </td>
+                    </tr>
+            }
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model QLKS.Models.tblLoaiPhong
+
+@{
+    ViewBag.Title = "XoaPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>XoaPhong</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tblLoaiPhong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Số giường
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mo_ta)
+        </dd>
+
+        <dt>
+            Đơn giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gia)
+        </dd>
+
+        <dt>
+            Phụ thu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ti_le_phu_thu)
+        </dd>
+
+        <dt>
+            Hình ảnh
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(model => model.anh)" width="80px" height="50px" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> 
+        </div>
+    }
+</div>

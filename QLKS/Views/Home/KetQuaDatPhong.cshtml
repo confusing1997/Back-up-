@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "KetQuaDatPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @{ 
+        if (ViewBag.result == "success")
+        {
+            <div style="margin-top: 20%; background-color: #e6ebed;">
+                <h2>Đã đặt phòng thành công.</h2>
+                Quý khách vui lòng đợi nhân viên gọi điện thoại để xác nhận đơn đặt phòng.
+            </div> 
+        }
+        else
+        {
+        
+        } 
+    }
+    <div>
+        <a href="@Url.Action("Index","Home")" style="color: black; font-size: 22px;">Trang chủ</a>
+    </div>
+</div>
+

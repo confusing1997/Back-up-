@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QLKS.Models.tblTang>
+
+@{
+    ViewBag.Title = "Danh sách tầng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Vị trí</div>
+</div>
+
+<div>
+    
+    <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>STT</th>
+                    <th>
+                        Tầng
+                    </th>
+                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
+                    {
+                        <th>Thao tác</th>
+                    }
+                </tr>
+
+                @{ 
+                    int stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                    <tr>
+                        <td>
+                            @stt
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ten_tang)
+                        </td>
+                        @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
+                        {
+                            <td>
+                                @Html.ActionLink("Sửa thông tin", "Edit", new { id = item.ma_tang },
+                               new { style = "color: black; border: 1px solid; background-color: #7daff0; font-weight: bold;" })
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>

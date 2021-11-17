@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Thanh toán thành công";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Xác nhận đơn đặt phòng của khách hàng</div>
+</div>
+@{
+    if (ViewBag.result == "success")
+    {
+        <div>
+            <h2>Thanh toán hóa đơn hoàn tất.</h2>
+        </div>
+    }
+    
+}

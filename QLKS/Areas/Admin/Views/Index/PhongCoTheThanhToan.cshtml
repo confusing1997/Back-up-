@@ -1,0 +1,52 @@
+﻿@model IEnumerable<QLKS.Models.tblHoaDon>
+
+@{
+    ViewBag.Title = "PhongCoTheThanhToan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Phòng đang được sử dụng</div>
+</div>
+
+<div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tên phòng</th>
+                    <th>Loại phòng</th>
+                    <th>Vị trí</th>
+                    <th>Thời gian nhận phòng</th>
+                    <th>Thời gian trả phòng</th>
+                    <th>Thông tin</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    if (item.ma_tinh_trang == 1)
+                    {
+    <tr>
+        <td>@item.tblPhieuDatPhong.tblPhong.so_phong</td>
+        <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>
+        <td>@item.tblPhieuDatPhong.tblPhong.tblTang.ten_tang</td>
+        <td>@item.tblPhieuDatPhong.ngay_vao.Value.ToShortDateString()</td>
+        <td>@item.tblPhieuDatPhong.ngay_ra.Value.ToShortDateString()</td>
+        <td>@item.tblTinhTrangHoaDon.mo_ta</td>
+        <td>
+            <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })">
+                Thanh toán hóa đơn
+            </a>
+        </td>
+    </tr>}
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
