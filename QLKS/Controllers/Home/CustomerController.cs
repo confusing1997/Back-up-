@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QLKS.Models;
@@ -116,6 +117,46 @@ namespace QLKS.Controllers.Home
         {
             Session["KH"] = null;
             return RedirectToAction("DangNhap");
+        }
+
+        public ActionResult HuyDonDatPhong(int? id)
+        {
+            tblKhachHang kh = new tblKhachHang();
+
+            if (Session["KH"] != null)
+            {
+                kh = (tblKhachHang)Session["KH"];
+            }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tblPhieuDatPhong pdp = db.tblPhieuDatPhongs.Find(id);
+
+            if (pdp == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (pdp.ma_kh != kh.ma_kh)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(pdp);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HuyDonDatPhong (int id)
+        {
+            tblPhieuDatPhong pdp = db.tblPhieuDatPhongs.Find(id);
+            pdp.ma_tinh_trang = 3;
+            db.Entry(pdp).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("DanhSachDonDatPhong", "Home");
         }
 
         protected override void Dispose (bool dispose)

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QLKS.Models.tblPhieuDatPhong>
+
+@{
+    ViewBag.Title = "DanhSachDonDatPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+    <div>
+        <div class="panel-heading">
+            <h3>Đơn đặt phòng đang chờ xác nhận</h3>
+        </div>
+
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                            Ngày đặt phòng
+                        </th>
+                        <th>
+                            Ngày nhận phòng
+                        </th>
+                        <th>
+                            Ngày trả phòng
+                        </th>
+                        <th>
+                            Tên phòng
+                        </th>
+                        <th>
+                            Thao tác
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngay_dat)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngay_vao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ngay_ra)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.tblPhong.so_phong)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("HuyDonDatPhong", "Customer", new { id = item.ma_pdp } )">
+                                    <p style="color: black;">Hủy đặt phòng</p>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

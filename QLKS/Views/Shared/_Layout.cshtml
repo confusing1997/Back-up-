@@ -56,6 +56,7 @@
                                 </div> 
                         } 
                     }
+
                 </div>
 
                     <div>
@@ -81,18 +82,22 @@
                                 {
                                     QLKS.Models.tblKhachHang kh = (QLKS.Models.tblKhachHang)Session["KH"];
 
-                            <span style="margin-left: 50%">
+                                    <span style="margin-left: 40%">
 
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                   href="@Url.Action("DoiMatKhau", "Customer")">Đổi mật khẩu
-                                </a>
+                                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                                           href="@Url.Action("DoiMatKhau", "Customer")">Đổi mật khẩu
+                                        </a>
 
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                   onclick="return confirm('Quý khách muốn đăng xuất?');"
-                                   href="@Url.Action("DangXuat", "Customer")">Đăng xuất
-                                </a>
+                                        <!--<a style="margin-left: 30px; font-size: 20px; color: black"
+                                           href="@Url.Action("DanhSachDonDatPhong", "Home")">Hủy đơn đặt phòng
+                                        </a>-->
 
-                            </span> 
+                                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                                           onclick="return confirm('Quý khách muốn đăng xuất?');"
+                                           href="@Url.Action("DangXuat", "Customer")">Đăng xuất
+                                        </a>
+
+                                    </span> 
                             }
                             else
                             {

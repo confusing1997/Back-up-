@@ -101,6 +101,18 @@ namespace QLKS.Controllers
 
         }
 
+        public ActionResult DanhSachDonDatPhong ()
+        {
+            if (Session["KH"] == null)
+            {
+                return RedirectToAction("DangNhap", "Customer");
+            }
+            HuyDonDatPhongQuaHan();
+            tblKhachHang tblkhach = (tblKhachHang)Session["KH"];
+            var liPhong = db.tblPhieuDatPhongs.Where(a => a.ma_kh == tblkhach.ma_kh && a.ma_tinh_trang == 1).ToList();
+            return View(liPhong);
+        }
+
         public ActionResult ChonPhong(string id) 
         {
             try

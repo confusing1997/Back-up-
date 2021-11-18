@@ -1,0 +1,63 @@
+﻿@model QLKS.Models.tblPhieuDatPhong
+
+@{
+    ViewBag.Title = "HuyDonDatPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-9" style="margin-left: 10%;">
+
+    <h3>Quý khách muốn hủy phiếu đã đặt ?</h3>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Ngày đặt phòng trên hệ thống
+                    </th>
+                    <th>
+                        Ngày nhận phòng
+                    </th>
+                    <th>
+                        Ngày trả phòng
+                    </th>
+                    <th>
+                        Tên phòng
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.ngay_dat)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ngay_vao)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ngay_ra)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(model => model.tblPhong.so_phong)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @using (Html.BeginForm("HuyDonDatPhong", "Customer", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                <input type="submit" value="Hủy đơn đặt phòng" class="btn btn-danger" />
+            </div>
+        }
+    </div>
+    <br/>
+</div>
+
