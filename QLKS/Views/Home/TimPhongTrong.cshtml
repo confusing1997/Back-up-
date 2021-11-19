@@ -83,7 +83,8 @@
 
             @foreach (var item in Model)
             {
-                
+                if (item.tblTang.ma_tang == 1)
+                {
                     <tr>
 
                         <td>
@@ -107,7 +108,8 @@
 
                         </td>
                     </tr>
-                
+                }
+
             }
 
         </table>
@@ -140,7 +142,7 @@
 
             @foreach (var item in Model)
             {
-                if (item.ma_tinh_trang == 1 && item.tblPhieuDatPhongs.Where(a => (a.ma_tinh_trang != 1 && a.ma_tinh_trang != 2)) != null && item.tblTang.ma_tang == 2)
+                if (item.tblTang.ma_tang == 2)
                 {
                     <tr>
 
@@ -197,7 +199,7 @@
 
             @foreach (var item in Model)
             {
-                if (item.ma_tinh_trang == 1 && item.tblPhieuDatPhongs.Where(a => (a.ma_tinh_trang != 1 && a.ma_tinh_trang != 2)) != null && item.tblTang.ma_tang == 3)
+                if (item.tblTang.ma_tang == 3)
                 {
                     <tr>
 
@@ -262,6 +264,7 @@
     function checkChonPhong() {
         var li = document.getElementsByClassName('btn-danger');
         if (li.length == 0) {
+            alert("Mời quý khách chọn phòng!");
             return false;
         }
         return true;

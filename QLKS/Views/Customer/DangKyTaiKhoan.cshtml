@@ -15,7 +15,7 @@
 
         @using (Html.BeginForm())
         {
-@Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
 
@@ -87,7 +87,7 @@
                 </div>}
 
         <div>
-            Bạn đã có tài khoản?
+            Quý khách đã có tài khoản?
         </div>
         <a href="@Url.Action("Login", "Account")">
             <button style="background-color: #bcc5f5; color: black; text-align: center">Đăng nhập</button>
