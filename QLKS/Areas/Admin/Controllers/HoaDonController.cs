@@ -301,6 +301,68 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             ViewBag.ma_hd = ma_hd;
             return View();
         }
+
+
+        public ActionResult DoiPhong (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tblHoaDon hd = db.tblHoaDons.Find(id);
+
+            if (hd == null)
+            {
+                return HttpNotFound();
+            }
+
+            tblPhieuDatPhong pdp = db.tblPhieuDatPhongs.Find(hd.ma_pdp);
+
+            var ds = db.tblPhongs.Where(a => a.ma_tinh_trang == 1 && 
+                    !(db.tblPhieuDatPhongs.Where(b => (b.ma_tinh_trang == 1 || b.ma_tinh_trang == 2)
+                    && b.ngay_ra > DateTime.Now && b.ngay_vao < pdp.ngay_ra))
+                    .Select(b => b.ma_phong).ToList().Contains(a.ma_phong));
+
+            ViewBag.ma_phong_moi = new SelectList(ds, "ma_phong", "so_phong");
+
+            return View(pdp);
+        }
+
+        public ActionResult DoiPhongThanhCong (String ma_pdp, String ma_phong_cu, String ma_phong_moi)
+        {
+            if (ma_pdp == null || ma_phong_cu == null || ma_phong_moi == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            try
+            {
+                tblPhieuDatPhong pdp = db.tblPhieuDatPhongs.Find(Int32.Parse(ma_pdp));
+                tblPhong phong = db.tblPhongs.Find(pdp.tblPhong.ma_phong);
+                phong.ma_tinh_trang = 1;
+                db.Entry(phong).State = EntityState.Modified;
+
+                pdp.ma_phong = Int32.Parse(ma_phong_moi);
+                phong = db.tblPhongs.Find(Int32.Parse(ma_phong_moi));
+                phong.ma_tinh_trang = 2;
+                db.Entry(phong).State = EntityState.Modified;
+                db.Entry(pdp).State = EntityState.Modified;
+                db.SaveChanges();
+                ViewBag.result = "thanhcong";
+            }
+
+            catch (Exception e){
+
+                ViewBag.result = "error" + e;
+
+            }
+            
+            return View();
+        }
+
+
+
         
 
         

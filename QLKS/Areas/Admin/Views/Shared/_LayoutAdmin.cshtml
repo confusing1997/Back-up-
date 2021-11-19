@@ -15,6 +15,7 @@
     <link href="~/Content/Admin/css/sb-admin.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet">
 </head>
+
 <style>
     a:hover {
         background-color: #87bbe6;
@@ -107,6 +108,11 @@
                            style="padding: 18px; font-size: 18px; border: 1px solid">
                             Gia hạn phòng
                         </a>
+
+                        <!--<a class="nav-link" href="@Url.Action("PhongCoTheDoi", "Index")" 
+                           style="padding: 18px; font-size: 18px; border: 1px solid">
+                            Khách đổi phòng
+                        </a>-->
                     }
 
                     @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 1)

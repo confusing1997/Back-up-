@@ -111,6 +111,16 @@ namespace QLKS.Areas.Admin.Controllers
             return View(ds.ToList());
         }
 
+        public ActionResult PhongCoTheDoi()
+        {
+            var phong = db.tblHoaDons.Where(a => a.ma_tinh_trang == 1)
+                .Include(b => b.tblNhanVien)
+                .Include(c => c.tblPhieuDatPhong)
+                .Include(d => d.tblTinhTrangHoaDon);
+
+            return View(phong.ToList());
+        }
+
         public ActionResult CaNhan() 
         {
             tblNhanVien nv = (tblNhanVien)Session["NV"];
@@ -194,6 +204,8 @@ namespace QLKS.Areas.Admin.Controllers
 
             return View();
         }
+
+        
 
 
 
