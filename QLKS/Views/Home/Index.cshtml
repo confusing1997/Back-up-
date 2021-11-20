@@ -5,35 +5,36 @@
 <div class="col-md-12" style="background-color: #f5f7f5; margin-bottom: 5px; height: 200px;;">
     
     <div style="margin-left: 10%; margin-top: 15px;"> 
-    <h3 style="font-weight: bold;">Tìm phòng trống</h3>
+        <h3 style="font-weight: bold;">Tìm phòng trống</h3>
                                            
 
-    @using (Html.BeginForm("TimPhongTrong","Home"))  
-    {
-        <div class="form-group">
-            <div class="col-md-4">
-                <label for="date_start" style="font-size: 25px; font-weight: bold;">Ngày vào</label>
-                @Html.TextBox("datestart", null, new { @class= "form-control" })
-                <div id="error_ngay_vao"></div>
+        @using (Html.BeginForm("TimPhongTrong","Home"))  
+        {
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="date_start" style="font-size: 25px; font-weight: bold;">Ngày vào</label>
+                    @Html.TextBox("datestart", null, new { @class= "form-control" })
+                    <div id="error_ngay_vao"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-4">
-                <label for="date_end" style="font-size: 25px; font-weight: bold;">Ngày ra</label>
-                @Html.TextBox("dateend", null, new { @class = "form-control" })
-                <div id="error_ngay_ra"></div>
+            <div class="form-group">
+                <div class="col-md-4">
+                    <label for="date_end" style="font-size: 25px; font-weight: bold;">Ngày ra</label>
+                    @Html.TextBox("dateend", null, new { @class = "form-control" })
+                    <div id="error_ngay_ra"></div>
+                </div>
             </div>
-        </div>
 
             <div class="col-md-4" style="margin-top: 50px;">
                 <input type="submit" 
-                       onclick="return checkday()"
-                       style="background-color: #bcc5f5; color: black; text-align: center; font-size: 22px;"
-                       value="Tìm phòng">
+                        onclick="return checkday()"
+                        style="background-color: #bcc5f5; color: black; text-align: center; font-size: 22px;"
+                        value="Tìm phòng">
             </div>
-    }
-        </div>
+        }
+
+    </div>
 </div>
 
 
@@ -54,6 +55,7 @@
         now.setSeconds(0);
         now.setMinutes(0);
         now.setMilliseconds(0);
+
 
         if (dateS < now) {
             return false;

@@ -37,7 +37,7 @@ namespace QLKS.Controllers.Home
                     db.tblKhachHangs.Add(tblKhach);
                     db.SaveChanges();
                     Session["KH"] = tblKhach;
-                    return RedirectToAction("XacNhanDatPhong", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

@@ -89,13 +89,17 @@ namespace QLKS.Controllers
             ds = (List<int>)Session["ds_phong"];
             if (ds == null)
                 ds = new List<int>();
+
             ViewBag.ma_phong = JsonConvert.SerializeObject(ds);
+
             foreach (var item in ds)
             {
                 tblPhong p = (tblPhong)db.tblPhongs.Find(Int32.Parse(item.ToString()));
                 sp += p.so_phong.ToString() + " - ";
             }
+
             ViewBag.so_phong = sp;
+
             var liP = db.tblPhieuDatPhongs.Where(u => u.ma_kh == kh.ma_kh && u.ma_tinh_trang == 1).ToList();
             return View(liP);
 
@@ -182,7 +186,8 @@ namespace QLKS.Controllers
                 List<int> ds = JsonConvert.DeserializeObject<List<int>>(ma_phong);
                 pdp.ma_kh = ma_kh;
                 pdp.ma_tinh_trang = 1;
-                pdp.ngay_dat = DateTime.Now;
+
+                pdp.ngay_dat    = DateTime.Now;
                 pdp.ngay_vao    = (DateTime.ParseExact(ngay_vao, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddHours(12));
                 pdp.ngay_ra     = (DateTime.ParseExact(ngay_ra, "dd/MM/yyyy", CultureInfo.InvariantCulture).AddHours(12));
 
