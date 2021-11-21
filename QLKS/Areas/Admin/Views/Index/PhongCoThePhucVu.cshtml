@@ -30,12 +30,16 @@
             </thead>
 
             <tbody>
-                @{ int stt = 0; }
+                @{ 
+                    int stt = 0; 
+                }
+
                 @foreach (var item in Model)
                 {
                     if (item.tblPhieuDatPhong.tblPhong.ma_tinh_trang == 2)
                     {
                         stt++;
+
                         <tr>
                             <td>@stt</td>
                             <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>

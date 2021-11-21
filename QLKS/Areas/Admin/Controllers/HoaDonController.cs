@@ -46,6 +46,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             List<tblHoaDon> dshd = new List<tblHoaDon>();
 
             String query = "select * from tblHoaDon where ma_tinh_trang = 2 ";
+
             if (!ngay_vao.Equals(""))
             {
                 query += " and ngay_tra_phong >= '" + ngay_vao + "'";
@@ -68,6 +69,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                 }
             }
             ViewBag.tongAllHoaDon = tongHD.ToString("C3");
+
             return View(dshd);
         }
 
@@ -145,10 +147,12 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             tblHoaDon tblHoaDon = db.tblHoaDons.Find(id);
+
             if (tblHoaDon == null)
             {
                 return HttpNotFound();
             }
+
             DateTime ngay_ra = DateTime.Now;
             DateTime ngay_vao = (DateTime)tblHoaDon.tblPhieuDatPhong.ngay_vao;
             DateTime ngay_du_kien = (DateTime)tblHoaDon.tblPhieuDatPhong.ngay_ra;
@@ -221,6 +225,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             int mahd = Int32.Parse(ma_hd);
             int madv = Int32.Parse(ma_dv);
             int sol = Int32.Parse(so_luong);

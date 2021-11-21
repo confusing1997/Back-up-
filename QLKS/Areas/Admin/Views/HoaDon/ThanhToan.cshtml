@@ -15,11 +15,15 @@
         
         <div>
             <div class="col-md-12">
+
                 <div>
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                     @Html.HiddenFor(model => model.ma_hd)
                     @Html.Hidden("tien_phong", (Double)ViewBag.tien_phong)
                     @Html.Hidden("tien_dich_vu", (Double)ViewBag.tien_dich_vu)
+
                     @try
                     {
                         @Html.Hidden("phu_thu", (Double)ViewBag.phu_thu)
@@ -33,15 +37,25 @@
                             
                         <tr>
                             <th>Họ tên khách hàng</th>
+
                             <th>Tên phòng</th>
+
                             <th>Thời gian nhận phòng</th>
+
                             <th>Thời gian trả phòng</th>
+
                             <th>Thời gian thanh toán hóa đơn</th>
+
                             <th>Đơn giá</th>
+
                             <th>Số ngày ở</th>
+
                             <th>Thành tiền</th>
+
                             <th>Số ngày chễ hạn</th>
+
                             <th>Phụ thu</th>
+
                             <th>Tổng cộng</th>
                         </tr>
 
@@ -75,6 +89,7 @@
             </div>
 
                 <div class="col-md-12">
+
                         <div class="col-md-12" style="background-color: #b1c3f0;">
                             <div>Món ăn đã gọi</div>
                         </div>
@@ -105,7 +120,9 @@
                                     {
                                         stt++;
                                         <tr>
-                                            <td>@stt</td>
+                                            <td>
+                                                @stt
+                                            </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => ds[i].tblDichVu.ten_dv)
                                             </td>
@@ -132,7 +149,7 @@
 
             <div class="form-group">
                 @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-8" })
-                <div class="col-md-4">
+                <div class="col-md-6">
                     @Html.TextBox("tong_tien", ((Double)ViewBag.tong_tien).ToString("C"), new { @class = "form-control", @readonly = "readonly" })
                 </div>
             </div>

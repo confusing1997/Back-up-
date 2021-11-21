@@ -26,7 +26,8 @@ namespace QLKS.Areas.Admin.Controllers
                 if (phong.ma_tinh_trang == 1)
                 {
                     soPhongTrong += 1;
-                } else
+                }
+                else
                 {
                     soPhongDangsd += 1;
                 }

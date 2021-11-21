@@ -10,12 +10,16 @@
 </div>
 
 <div class="col-md-12">
-        <div>
+    <div>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Mô tả</th>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        Mô tả
+                    </th>
                     <th>
                         Tên dịch vụ
                     </th>
@@ -70,6 +74,7 @@
                                 <span aria-hidden="true" style="color: red;">X</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
                             @Html.TextBox("ma_hd", (int)ViewBag.ma_hd, new { @class = "form-control", style = "display:none" })
                             @Html.TextBox("ma_dv", null, new { @class = "form-control", @style = "display:none" })
@@ -90,6 +95,7 @@
 </div>
 
 <div class="col-md-12">
+
     <div style="background-color: #b1c3f0;">
         Món ăn đã đặt
     </div>
@@ -107,6 +113,7 @@
                     </th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var item in Model.dsDvDaDat)
                 {

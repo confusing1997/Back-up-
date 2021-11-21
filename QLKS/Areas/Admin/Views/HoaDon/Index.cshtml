@@ -33,8 +33,11 @@
 
 
 <div class="col-md-12">
+
     <div>
+
         <h5 style="font-weight: bold;">Tổng doanh thu cả hệ thống: @ViewBag.tongAllHoaDon VNĐ</h5>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -65,12 +68,15 @@
             </thead>
 
             <tbody>
+
                 @{ 
-                        int stt = 0;
+                    int stt = 0;
                 }
+
                 @foreach (var item in Model)
                 {
                     stt++;
+
                     <tr>
                         <td style="text-align: center;">
                             @stt

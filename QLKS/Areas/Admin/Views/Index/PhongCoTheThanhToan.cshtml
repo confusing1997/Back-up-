@@ -30,19 +30,20 @@
                 {
                     if (item.ma_tinh_trang == 1)
                     {
-    <tr>
-        <td>@item.tblPhieuDatPhong.tblPhong.so_phong</td>
-        <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>
-        <td>@item.tblPhieuDatPhong.tblPhong.tblTang.ten_tang</td>
-        <td>@item.tblPhieuDatPhong.ngay_vao.Value.ToShortDateString()</td>
-        <td>@item.tblPhieuDatPhong.ngay_ra.Value.ToShortDateString()</td>
-        <td>@item.tblTinhTrangHoaDon.mo_ta</td>
-        <td>
-            <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })">
-                Thanh toán hóa đơn
-            </a>
-        </td>
-    </tr>}
+                        <tr>
+                            <td>@item.tblPhieuDatPhong.tblPhong.so_phong</td>
+                            <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>
+                            <td>@item.tblPhieuDatPhong.tblPhong.tblTang.ten_tang</td>
+                            <td>@item.tblPhieuDatPhong.ngay_vao.Value.ToShortDateString()</td>
+                            <td>@item.tblPhieuDatPhong.ngay_ra.Value.ToShortDateString()</td>
+                            <td>@item.tblTinhTrangHoaDon.mo_ta</td>
+                            <td>
+                                <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })">
+                                    Thanh toán hóa đơn
+                                </a>
+                            </td>
+                        </tr>
+                    }
 
                 }
 
