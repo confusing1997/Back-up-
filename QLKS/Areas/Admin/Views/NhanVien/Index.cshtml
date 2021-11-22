@@ -11,64 +11,63 @@
 
 
 <div>
-    
-        <div>
-
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>
-                            Họ tên
-                        </th>
-                        <th>
-                            Chức vụ
-                        </th>
-                        <th>
-                            Ngày sinh
-                        </th>
-                        <th>
-                            Địa chỉ
-                        </th>
-                        <th>
-                            SĐT
-                        </th>
-                        <!--@if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
-                        {
-                            <th>Thao tác</th>
-                        }-->
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ 
-                        int stt = 0;
-                    }
-                    @foreach (var item in Model)
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>
+                        Họ tên
+                    </th>
+                    <th>
+                        Chức vụ
+                    </th>
+                    <th>
+                        Ngày sinh
+                    </th>
+                    <th>
+                        Địa chỉ
+                    </th>
+                    <th>
+                        SĐT
+                    </th>
+                    <!--@if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
                     {
-                        stt++;
-                    <tr>
-                        <td>
-                            @stt
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ho_ten)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.tblChucVu.chuc_vu)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ngay_sinh)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.dia_chi)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.sdt)
-                        </td>
+                        <th>Thao tác</th>
+                    }-->
+                </tr>
+            </thead>
+
+            <tbody>
+                @{ 
+                    int stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
+                <tr>
+                    <td>
+                        @stt
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ho_ten)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tblChucVu.chuc_vu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ngay_sinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dia_chi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sdt)
+                    </td>
                         
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                </tr>
+                }
+            </tbody>
+        </table>
     </div>
+</div>

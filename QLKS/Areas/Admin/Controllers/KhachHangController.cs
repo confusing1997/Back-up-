@@ -14,10 +14,38 @@ namespace QLKS.Areas.Admin.Controllers
     {
         private dataQLKSEntities db = new dataQLKSEntities();
         // GET: KhachHang
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
-            return View(db.tblKhachHangs.ToList());
+            return View(db.tblKhachHangs.Where(a => searching == null || a.ho_ten.Contains(searching)).ToList());
         }
+
+        public ActionResult ThemKhachHang ()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ThemKhachHang (tblKhachHang tblkhachhang)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.tblKhachHangs.Find(tblkhachhang.ma_kh) == null && 
+                    db.tblKhachHangs.Where(x => x.mail == tblkhachhang.mail).FirstOrDefault() == null)
+                {
+                    db.tblKhachHangs.Add(tblkhachhang);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "KhachHang");
+                }
+            }
+            
+            
+            return View(tblkhachhang);
+        }
+
+
+
+
 
         
         

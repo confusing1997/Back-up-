@@ -9,55 +9,56 @@
     <div>Danh sách phòng</div>
 </div>
 
-
+<!--<div>
+    <a href="@Url.Action("ThemPhong", "Phong")" >Thêm phòng</a>
+</div>-->
 
 <div>
-    
-        <div>
-            <table class="table table-bordered">
-                <thead>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mô tả</th>
+                    <th>
+                        Tên phòng
+                    </th>
+                    <th>
+                        Số giường
+                    </th>
+                    <th>
+                        Vị trí
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ 
+                    int stt = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    stt++;
                     <tr>
-                        <th>STT</th>
-                        <th>Mô tả</th>
-                        <th>
-                            Tên phòng
-                        </th>
-                        <th>
-                            Số giường
-                        </th>
-                        <th>
-                            Vị trí
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ 
-                        int stt = 0;
-                    }
-                    @foreach (var item in Model)
-                    {
-                        stt++;
-                        <tr>
-                            <td>
-                                @stt
-                            </td>
-                            <td>
-                                <img src="@Html.DisplayFor(modelItem => item.tblLoaiPhong.anh)" width="80px" height="50px" />
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.so_phong)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
-                            </td>
+                        <td>
+                            @stt
+                        </td>
+                        <td>
+                            <img src="@Html.DisplayFor(modelItem => item.tblLoaiPhong.anh)" width="80px" height="50px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.so_phong)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblLoaiPhong.mo_ta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
+                        </td>
                             
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+</div>
 

@@ -84,9 +84,11 @@ namespace QLKS.Areas.Admin.Controllers
         public ActionResult Edit(HttpPostedFileBase file, [Bind(Include = "ma_dv,ten_dv,gia,don_vi,ton_kho")] tblDichVu tblDichVu)
         {
             tblDichVu dv = db.tblDichVus.Find(tblDichVu.ma_dv);
+
             if (ModelState.IsValid)
             {
                 String anh = dv.anh;
+
                 if (file != null)
                 {
                     string pic = System.IO.Path.GetFileName(file.FileName);

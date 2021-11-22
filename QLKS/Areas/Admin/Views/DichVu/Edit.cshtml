@@ -13,10 +13,12 @@
 
     @using (Html.BeginForm("Edit", "DichVu", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             @Html.HiddenFor(model => model.ma_dv)
 
             <div class="form-group">
