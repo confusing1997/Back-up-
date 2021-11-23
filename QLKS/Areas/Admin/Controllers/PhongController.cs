@@ -50,6 +50,84 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         }
 
 
+        public ActionResult XoaPhong (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tblPhong tblphong = db.tblPhongs.Find(id);
+
+            if (tblphong == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            return View(tblphong);
+        }
+
+        [HttpPost, ActionName("XoaPhong")]
+        [ValidateAntiForgeryToken]
+        public ActionResult XoaPhong (int id)
+        {
+            try
+            {
+                tblPhong tblphong = db.tblPhongs.Find(id);
+                db.tblPhongs.Remove(tblphong);
+                db.SaveChanges();
+            }
+
+            catch
+            {
+
+            }
+
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult SuaPhong (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tblPhong tblphong = db.tblPhongs.Find(id);
+
+            if (tblphong == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.loai_phong = new SelectList(db.tblLoaiPhongs, "loai_phong", "mo_ta", tblphong.tblLoaiPhong.loai_phong);
+            ViewBag.ma_tang = new SelectList(db.tblTangs, "ma_tang", "ten_tang", tblphong.ma_tang);
+            ViewBag.ma_tinh_trang = new SelectList(db.tblTinhTrangPhongs, "ma_tinh_trang", "mo_ta");
+
+
+            return View(tblphong);
+        }
+
+        [HttpPost, ActionName("SuaPhong")]
+        [ValidateAntiForgeryToken]
+        public ActionResult SuaPhong (tblPhong tblphong)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(tblphong).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+
+            return View();
+        }
+
+
+
 
 
         protected override void Dispose(bool disposing)
