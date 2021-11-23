@@ -1,0 +1,168 @@
+﻿@model QLKS.Models.tblHoaDon
+
+@{
+    ViewBag.Title = "ChiTietHoaDon";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-12" style="background-color: #b1c3f0;">
+    <div>Chi tiết hóa đơn</div>
+</div>
+
+<div style="margin: 15px;">
+    @using (Html.BeginForm("XacNhanThanhToan", "HoaDon"))
+    {
+        @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.ma_hd)
+            
+            <div class="form-group">
+                @Html.Label("Tên khách hàng", htmlAttributes: new { @class = "control-label col-md-8", style="font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tblPhieuDatPhong.tblKhachHang.ho_ten, 
+                    new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Nhân viên lập hóa đơn", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tblNhanVien.ho_ten, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ma_nv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Tên phòng", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tblPhieuDatPhong.tblPhong.so_phong, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.tblPhieuDatPhong.tblPhong.so_phong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Ngày khách nhận phòng", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.tblPhieuDatPhong.ngay_vao, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.tblPhieuDatPhong.ngay_vao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Ngày khách trả phòng", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.tblPhieuDatPhong.ngay_ra, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.tblPhieuDatPhong.ngay_ra, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Ngày khách thanh toán hóa đơn", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.TextBox("ngay_tra_phong", (String)ViewBag.time_now, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.ngay_tra_phong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Tiền phòng", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.TextBox("tien_phong", (Double)ViewBag.tien_phong, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                @Html.Label("Tiền dịch vụ", htmlAttributes: new { @class = "control-label col-md-8", style = "font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.TextBox("tien_dich_vu", (Double)ViewBag.tien_dich_vu, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+
+                <div class="col-md-12" style="background-color: #b1c3f0;">
+                    <div>Dịch vụ khách sử dụng</div>
+                </div>
+
+                <div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>
+                                Tên dịch vụ
+                            </th>
+                            <th>
+                                Giá
+                            </th>
+                            <th>
+                                Đơn vị
+                            </th>
+                            <th>
+                                Số lượng
+                            </th>
+                            <th>
+                                Thành tiền
+                            </th>
+                        </tr>
+                        @{
+                            List<QLKS.Models.tblDichVuDaDat> ds = (List<QLKS.Models.tblDichVuDaDat>)ViewBag.list_dv;
+                            List<double> tt = (List<double>)ViewBag.list_tong_tien_dv;
+                            for (int i = 0; i < ds.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].tblDichVu.ten_dv)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].tblDichVu.gia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].tblDichVu.don_vi)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].so_luong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tt[i])
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                    <div>Tổng tiền dịch vụ</div>
+                    @Html.TextBox("tong_tien_dv", (Double)ViewBag.tien_dich_vu, new { @class = "form-control", @readonly = "readonly" })
+
+                </div>
+            </div>
+
+                        
+
+            <div class="form-group hidden">
+                @Html.Label("Phụ thu", htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.phu_thu, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phu_thu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Tổng hóa đơn", htmlAttributes: new { @class = "control-label col-md-8", style="font-size: 22px; font-weight: bold;" })
+                <div class="col-md-10">
+                    @Html.TextBox("tong_tien", (Double)ViewBag.tong_hoa_don, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-group hidden">
+                @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label col-md-8" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.tblTinhTrangHoaDon.mo_ta, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        }
+</div>
+
+

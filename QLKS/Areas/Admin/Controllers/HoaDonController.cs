@@ -366,7 +366,46 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             return View();
         }
 
+        public ActionResult ChiTietHoaDon (int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            tblHoaDon tblhoadon = db.tblHoaDons.Find(id);
+
+            if (tblhoadon == null)
+            {
+                return HttpNotFound();
+            }
+
+            var tien_phong = (tblhoadon.tblPhieuDatPhong.ngay_ra - tblhoadon.tblPhieuDatPhong.ngay_vao).Value.TotalDays
+                                * tblhoadon.tblPhieuDatPhong.tblPhong.tblLoaiPhong.gia;
+
+            ViewBag.tien_phong = tien_phong;
+            ViewBag.time_now = DateTime.Now.ToString();
+
+            List<tblDichVuDaDat> dvdd = db.tblDichVuDaDats.Where(a => a.ma_hd == id).ToList();
+            ViewBag.list_dv = dvdd;
+
+            double tong_tien_dv = 0;
+
+            List<double> tong_tien = new List<double>();
+
+            foreach (var item in dvdd)
+            {
+                double tien = (double)(item.so_luong * item.tblDichVu.gia);
+                tong_tien_dv += tien;
+                tong_tien.Add(tien);
+            }
+
+            ViewBag.list_tong_tien_dv = tong_tien;
+            ViewBag.tien_dich_vu = tong_tien_dv;
+            ViewBag.tong_hoa_don = tien_phong + tong_tien_dv;
+            
+            return View(tblhoadon);
+        }
 
         
 

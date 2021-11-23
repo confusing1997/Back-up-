@@ -432,6 +432,7 @@
     <Content Include="Areas\Admin\Views\Phong\ThemPhong.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\XoaPhong.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\SuaPhong.cshtml" />
+    <Content Include="Areas\Admin\Views\HoaDon\ChiTietHoaDon.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
