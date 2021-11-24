@@ -36,6 +36,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             }
 
             ViewBag.tongAllHoaDon = tongTien.ToString("C3");
+            /*Count*/
 
             return View(tblhd);
         }
