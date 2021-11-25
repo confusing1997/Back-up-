@@ -47,6 +47,10 @@ namespace QLKS.Areas.Admin.Controllers.Admin
 
                     return RedirectToAction("Index", "Phong");
                 }
+                else
+                {
+                    ModelState.AddModelError("", "Tên phòng đã tồn tại !");
+                }
             }
             ViewBag.loai_phong = new SelectList(db.tblLoaiPhongs, "loai_phong", "mo_ta");
             ViewBag.ma_tang = new SelectList(db.tblTangs, "ma_tang", "ten_tang");

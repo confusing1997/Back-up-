@@ -9,9 +9,9 @@
     <div>Danh sách phòng</div>
 </div>
 
-<div>
+<!--<div>
     <a href="@Url.Action("ThemPhong", "Phong")" >Thêm phòng</a>
-</div>
+</div>-->
 
 <div>
     <div>
@@ -54,10 +54,6 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.tblTang.ten_tang)
                         </td>
-                        <td>
-                            @Html.ActionLink("delte", "XoaPhong", new { id= item.ma_phong })
-                        </td>
-                            
                     </tr>
                 }
             </tbody>

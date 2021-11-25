@@ -11,102 +11,92 @@
 
 @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 3)
 {
-    <h5>Số phòng đang được sử dụng: @ViewBag.soPhongDangsd phòng</h5>
-    <h5>Số phòng đang trống: @ViewBag.soPhongTrong phòng</h5>
+    <div style="margin: 15px;">
+        <h5>Số phòng đang được sử dụng: @ViewBag.soPhongDangsd phòng</h5>
+        <h5>Số phòng đang trống: @ViewBag.soPhongTrong phòng</h5>
+    </div>
 }
 
 <div>
-    <div>
-        <div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="text-align: center; width: 50px;">STT</th>
-                        <th style="text-align: center; width: 50px;">Số giường</th>
-                        <th style="text-align: center; width: 50px;">Tên phòng</th>
-                        <th style="text-align: center; width: 50px;">Vị trí phòng</th>
-                        <th style="text-align: center; width: 50px;">Hỉnh ảnh</th>
-                        <th style="text-align: center; width: 50px;">Tình trạng phòng</th>
-                    </tr>
-                </thead>
+
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th style="text-align: center; width: 50px;">STT</th>
+                <th style="text-align: center; width: 50px;">Số giường</th>
+                <th style="text-align: center; width: 50px;">Tên phòng</th>
+                <th style="text-align: center; width: 50px;">Vị trí phòng</th>
+                <th style="text-align: center; width: 50px;">Mô tả</th>
+                <th style="text-align: center; width: 50px;">Tình trạng phòng</th>
+            </tr>
+        </thead>
                 
-                <tbody>
+        <tbody>
+            @{ 
+                int stt = 0;
+            }
 
-                    @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 3)
+                {
+                    if (item.tblTinhTrangPhong.ma_tinh_trang == 1)
                     {
-                        if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 3)
-                        {
-                            if (item.tblTinhTrangPhong.ma_tinh_trang == 1)
-                            {
-                            <tr>
-                                <td>@item.ma_phong</td>
-                                <td>@item.tblLoaiPhong.mo_ta</td>
-                                <td>@item.so_phong</td>
-                                <td>@item.tblTang.ten_tang</td>
-                                <td>
-                                    <img src="@item.tblLoaiPhong.anh" width="80px" height="50px" />
-                                </td>
+                        stt++;
 
+                        <tr>
+                            <td style="text-align: center;">@stt</td>
+                            <td style="text-align: center;">@item.tblLoaiPhong.mo_ta</td>
+                            <td style="text-align: center;">@item.so_phong</td>
+                            <td style="text-align: center;">@item.tblTang.ten_tang</td>
 
-                                @if (item.ma_tinh_trang == 1)
-                                {
-                                    <td style="text-align: center;">
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-                                else if (item.ma_tinh_trang == 2)
-                                {
-                                    <td>
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-
-                                else
-                                {
-                                    <td>
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-                            </tr>
-                            }
-                        }
-
-                        else if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 3)
-                        {
-                            <tr>
-                                <td style="text-align: center;">@item.ma_phong</td>
-                                <td style="text-align: center;">@item.tblLoaiPhong.mo_ta</td>
-                                <td style="text-align: center;">@item.so_phong</td>
-                                <td style="text-align: center;">@item.tblTang.ten_tang</td>
-                                <td>
-                                    <img src="@item.tblLoaiPhong.anh" width="80px" height="50px" />
-                                </td>
-
-
-                                @if (item.ma_tinh_trang == 1)
-                                {
-                                    <td style="text-align: center;">
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-                                else if (item.ma_tinh_trang == 2)
-                                {
-                                    <td>
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-
-                                else
-                                {
-                                    <td>
-                                        <div>@item.tblTinhTrangPhong.mo_ta</div>
-                                    </td>
-                                }
-                            </tr>
-                        }
+                            <td style="text-align: center;">
+                                <img src="@item.tblLoaiPhong.anh" width="80px" height="50px" />
+                            </td>
+                        
+                            <td style="text-align: center;">
+                                <div>@item.tblTinhTrangPhong.mo_ta</div>
+                            </td>
+                        </tr>
                     }
-                </tbody>
-            </table>
-        </div>
-    </div>
+                }
+
+                else if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 3)
+                {
+                    stt++;
+
+                    <tr>
+                        <td style="text-align: center;">@stt</td>
+                        <td style="text-align: center;">@item.tblLoaiPhong.mo_ta</td>
+                        <td style="text-align: center;">@item.so_phong</td>
+                        <td style="text-align: center;">@item.tblTang.ten_tang</td>
+                        <td style="text-align: center;">
+                            <img src="@item.tblLoaiPhong.anh" width="80px" height="50px" />
+                        </td>
+
+
+                        @if (item.ma_tinh_trang == 1)
+                        {
+                            <td style="text-align: center;">
+                                <div>@item.tblTinhTrangPhong.mo_ta</div>
+                            </td>
+                        }
+                        else if (item.ma_tinh_trang == 2)
+                        {
+                            <td style="text-align: center;">
+                                <div>@item.tblTinhTrangPhong.mo_ta</div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <div>@item.tblTinhTrangPhong.mo_ta</div>
+                            </td>
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 </div>
