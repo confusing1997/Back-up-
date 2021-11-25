@@ -40,12 +40,18 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                db.tblPhongs.Add(tblphong);
-                db.SaveChanges();
+                if (db.tblPhongs.Where(a => a.so_phong.Equals(tblphong.so_phong)).FirstOrDefault() == null) 
+                {
+                    db.tblPhongs.Add(tblphong);
+                    db.SaveChanges();
 
-                return RedirectToAction("Index", "Phong");
+                    return RedirectToAction("Index", "Phong");
+                }
             }
-            
+            ViewBag.loai_phong = new SelectList(db.tblLoaiPhongs, "loai_phong", "mo_ta");
+            ViewBag.ma_tang = new SelectList(db.tblTangs, "ma_tang", "ten_tang");
+            ViewBag.ma_tinh_trang = new SelectList(db.tblTinhTrangPhongs, "ma_tinh_trang", "mo_ta");
+
             return View(tblphong);
         }
 
