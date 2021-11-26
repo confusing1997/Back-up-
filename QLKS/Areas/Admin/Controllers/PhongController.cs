@@ -94,7 +94,6 @@ namespace QLKS.Areas.Admin.Controllers.Admin
 
             }
 
-
             return RedirectToAction("Index");
         }
 
@@ -126,14 +125,23 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblphong).State = EntityState.Modified;
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
+                if (db.tblPhongs.Where(a => a.so_phong.Equals(tblphong.so_phong)).FirstOrDefault() == null)
+                {
+                    db.Entry(tblphong).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tên phòng này đã tồn tại !");
+                }
             }
 
+            ViewBag.loai_phong = new SelectList(db.tblLoaiPhongs, "loai_phong", "mo_ta");
+            ViewBag.ma_tang = new SelectList(db.tblTangs, "ma_tang", "ten_tang");
+            ViewBag.ma_tinh_trang = new SelectList(db.tblTinhTrangPhongs, "ma_tinh_trang", "mo_ta");
 
-            return View();
+            return View(tblphong);
         }
 
 
