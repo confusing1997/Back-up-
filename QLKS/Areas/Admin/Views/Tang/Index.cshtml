@@ -14,14 +14,15 @@
     <div class="card-body">
             <table class="table table-bordered">
                 <tr>
-                    <th>STT</th>
+                    <th>
+                        STT
+                    </th>
                     <th>
                         Tầng
                     </th>
-                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
-                    {
-                        <th>Thao tác</th>
-                    }
+                    <th>
+                        Thao tác
+                    </th>
                 </tr>
 
                 @{ 
@@ -30,6 +31,7 @@
                 @foreach (var item in Model)
                 {
                     stt++;
+
                     <tr>
                         <td>
                             @stt
@@ -37,13 +39,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ten_tang)
                         </td>
-                        @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu < 2)
-                        {
-                            <td>
-                                @Html.ActionLink("Sửa thông tin", "Edit", new { id = item.ma_tang },
-                               new { style = "color: black; border: 1px solid; background-color: #7daff0; font-weight: bold;" })
-                            </td>
-                        }
+                        <td>
+                            @Html.ActionLink("Sửa thông tin", "Edit", new { id = item.ma_tang },
+                            new { @class="btn btn-primary" })
+                        </td>
+                        
                     </tr>
                 }
 

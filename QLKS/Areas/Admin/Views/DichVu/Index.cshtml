@@ -11,15 +11,11 @@
 
 <div style="margin: 5px;">
     @using (Html.BeginForm("Index", "DichVu", FormMethod.Get))
-            {
-                @Html.TextBox("searching")<input type="submit" value="Search" class="btn btn-primary"/>
-            }
+    {
+        @Html.TextBox("searching")<input type="submit" value="Search" class="btn btn-primary"/> // name, value, new {}
+    }
 </div>
 
-<!--<div>
-    @Html.ActionLink("Thêm dịch vụ", "Create",
-    new { style = "color: black; border: 1px solid; background-color: #7daff0; font-weight: bold;" })
-</div>-->
 
 <div>
     <div>
@@ -34,7 +30,7 @@
                            Tên món
                         </th>
                         <th>
-                            Đơn giá
+                            Đơn giá/ VNĐ
                         </th>
                         <th>
                             Mô tả
@@ -47,6 +43,7 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody>
 
                     @{ 
@@ -74,8 +71,8 @@
                                     @Html.DisplayFor(modelitem => item.ton_kho)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa món ăn", "Edit", new { @id=item.ma_dv },
-                                    new { style = "color: black; border: 1px solid; background-color: #7daff0;" })
+                                    @Html.ActionLink("Chỉnh sửa thông tin", "Edit", new { @id=item.ma_dv },
+                                    new { @class="btn btn-primary" })
                                 </td>
                             </tr>
                         

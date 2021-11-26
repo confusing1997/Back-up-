@@ -10,19 +10,6 @@
 </div>
 
 
-<!--<div>
-    @using (Html.BeginForm("Index", "KhachHang", FormMethod.Get)) { 
-        
-        @Html.TextBox("searching")<input type="submit" value="Search" class="btn btn-primary"/>
-
-    }
-</div>-->
-
-
-<!--<div>
-    <a href="@Url.Action("ThemKhachHang", "KhachHang")" >Thêm khách hàng</a>
-</div>-->
-
 
 <div>
     
@@ -34,23 +21,24 @@
                         STT
                     </th>
                     <th>
-                        @Html.DisplayName("Họ tên")
+                        Họ tên khách hàng
                     </th>
                     
                     <th>
-                        @Html.DisplayName("Số ĐT")
+                        Số điện thoại
                     </th>
                     <th>
-                        @Html.DisplayName("Email")
+                        Địa chỉ email
                     </th>
                 </tr>
 
                 @{ 
-                    int stt = 0;
+                        int stt = 0;
                 }
                 @foreach (var item in Model)
                 {
                     stt++;
+
                     <tr>
                         <td>
                             @stt

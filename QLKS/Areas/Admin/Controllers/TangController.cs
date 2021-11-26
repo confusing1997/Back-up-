@@ -82,9 +82,17 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tblTang).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (db.tblTangs.Where(a => a.ten_tang.Equals(tblTang.ten_tang)).FirstOrDefault() == null)
+                {
+                    db.Entry(tblTang).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tên tầng đã tồn tại!");
+                }
+               
             }
             return View(tblTang);
         }
@@ -121,6 +129,10 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             }
             return RedirectToAction("Index");
         }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

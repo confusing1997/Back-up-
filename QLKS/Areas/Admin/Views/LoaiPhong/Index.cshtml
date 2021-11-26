@@ -8,9 +8,7 @@
 <div class="col-md-12" style="background-color: #b1c3f0;">
     <div>Danh sách loại phòng</div>
 </div>
-<!--<div>
-    @Html.ActionLink("Them", "ThemLoaiPhong")
-</div>-->
+
 <div >
     <div>
         <table class="table table-bordered">
@@ -24,7 +22,7 @@
                         Số giường
                     </th>
                     <th>
-                        Đơn giá
+                        Đơn giá/ VNĐ
                     </th>
                     <th>
                        Phí phát sinh
@@ -57,10 +55,10 @@
                         @Html.DisplayFor(modelItem => item.gia)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ti_le_phu_thu)
+                        @Html.DisplayFor(modelItem => item.ti_le_phu_thu)%
                     </td>
                     <td>
-                        @Html.ActionLink("Chỉnh sửa", "SuaLoaiPhong", new { id = item.loai_phong })
+                        @Html.ActionLink("Chỉnh sửa", "SuaLoaiPhong", new { id = item.loai_phong }, new { @class="btn btn-primary" })
                     </td>
 
                 </tr>
