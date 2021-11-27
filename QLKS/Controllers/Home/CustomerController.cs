@@ -39,9 +39,13 @@ namespace QLKS.Controllers.Home
                     Session["KH"] = tblKhach;
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                else if (db.tblKhachHangs.Find(tblKhach.ma_kh) != null)
                 {
-                    ModelState.AddModelError("", "Tên tài khoản hoặc email đã được sử dụng");
+                    ModelState.AddModelError(nameof(tblKhachHang.ma_kh), "Tài khoản đã có người sử dụng");
+                }
+                else if (db.tblKhachHangs.Where(m => m.mail.Equals(tblKhach.mail)).FirstOrDefault() != null)
+                {
+                    ModelState.AddModelError(nameof(tblKhachHang.mail), "Địa chỉ email đã có người sử dụng");
                 }
             }
             return View(tblKhach);

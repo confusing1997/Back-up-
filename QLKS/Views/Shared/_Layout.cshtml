@@ -29,105 +29,121 @@
 <body>
 
     <header>
-                <div style="height: 30px; background-color: #dae4ed;">
-                    <a href="@Url.Action("Index", "Home")">
-                        <img src="~/Content/Home/images/Logo/Logo.jpg" style="width: 150px; margin-left: 5px;" />
-                    </a>
+
+        <div style="height: 30px; background-color: #dae4ed;">
+            <a href="@Url.Action("Index", "Home")">
+                <img src="~/Content/Home/images/Logo/Logo.jpg" style="width: 150px; margin-left: 5px;" />
+            </a>
+        </div>
+
+        <div class="col-md-4" style="margin-left: 60%; margin-bottom: 30px; background-color: #ffffff;">
+
+            <div style="text-align: center; font-size: 30px;">
+                <h2 style="padding-top: 10px;">KÍNH CHÀO QUÝ KHÁCH</h2>
+                <a style="color: black" class="nav-link" href="@Url.Action("Index", "Home")">LÊ AN HOSPITALITY</a>
+                <div>
+                    1900 1833
                 </div>
+            </div>
 
-                <div class="col-md-4" style="margin-left: 60%; margin-bottom: 30px; background-color: #ffffff;">
+            @{ if (Session["KH"] != null)
+                {
 
-                    <div style="text-align: center; font-size: 30px;">
-                        <h2 style="padding-top: 10px;">KÍNH CHÀO QUÝ KHÁCH</h2>
-                        <a style="color: black" class="nav-link" href="@Url.Action("Index", "Home")">LÊ AN HOSPITALITY</a>
-                        <div>
-                            1900 1833
-                        </div>
-                    </div>
+                    QLKS.Models.tblKhachHang kh = (QLKS.Models.tblKhachHang)Session["KH"];
+
+                    <div style="text-align: center">
+                        <div style="margin-left: 30px; font-size: 20px; color: black"
+                                href="#">Khách hàng: @kh.ho_ten</div>
+                        </div> 
+                } 
+            }
+
+        </div>
+
+            <div>
+                <div class="col-md-12" style="margin-bottom: 15px; background-color: #dae4ed;">
+
+                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                            href="@Url.Action("Index", "Home")">Tìm phòng trống
+                        </a>
+
+                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                            href="@Url.Action("About", "Home")">Về chúng tôi
+                        </a>
+
+                        <a style="margin-left: 30px; font-size: 20px; color: black" id="conTact"
+                            href="@Url.Action("Contact", "Home")">Liên lạc
+                        </a>
+
+                        <a style="margin-left: 30px; font-size: 20px; color: black" id="conTact"
+                            href="@Url.Action("GioiThieuDichVu", "Home")">Giới thiệu dịch vụ
+                        </a>
 
                     @{ if (Session["KH"] != null)
                         {
-
                             QLKS.Models.tblKhachHang kh = (QLKS.Models.tblKhachHang)Session["KH"];
 
-                            <div style="text-align: center">
-                                <div style="margin-left: 30px; font-size: 20px; color: black"
-                                     href="#">Khách hàng: @kh.ho_ten</div>
-                                </div> 
-                        } 
+                            <span style="margin-left: 40%">
+
+                                <a style="margin-left: 30px; font-size: 20px; color: black"
+                                    href="@Url.Action("DoiMatKhau", "Customer")">Đổi mật khẩu
+                                </a>
+
+                                <!--<a style="margin-left: 30px; font-size: 20px; color: black"
+                                    href="@Url.Action("DanhSachDonDatPhong", "Home")">Hủy đơn đặt phòng
+                                </a>-->
+
+                                <a style="margin-left: 30px; font-size: 20px; color: black"
+                                    onclick="return confirm('Quý khách muốn đăng xuất?');"
+                                    href="@Url.Action("DangXuat", "Customer")">Đăng xuất
+                                </a>
+
+                            </span> 
                     }
+                    else
+                    {
+                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                            href="@Url.Action("DangNhap", "Customer")">Đăng nhập
+                        </a>
 
-                </div>
+                        <a style="margin-left: 30px; font-size: 20px; color: black"
+                            href="@Url.Action("DangKyTaiKhoan", "Customer")">Đăng ký tài khoản
+                        </a> 
+                    } 
+                }
 
-                    <div>
-                        <div class="col-md-12" style="margin-bottom: 15px; background-color: #dae4ed;">
-
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                    href="@Url.Action("Index", "Home")">Tìm phòng trống
-                                </a>
-
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                    href="@Url.Action("About", "Home")">Về chúng tôi
-                                </a>
-
-                                <a style="margin-left: 30px; font-size: 20px; color: black" id="conTact"
-                                    href="@Url.Action("Contact", "Home")">Liên lạc
-                                </a>
-
-                                <a style="margin-left: 30px; font-size: 20px; color: black" id="conTact"
-                                    href="@Url.Action("GioiThieuDichVu", "Home")">Giới thiệu dịch vụ
-                                </a>
-
-                            @{ if (Session["KH"] != null)
-                                {
-                                    QLKS.Models.tblKhachHang kh = (QLKS.Models.tblKhachHang)Session["KH"];
-
-                                    <span style="margin-left: 40%">
-
-                                        <a style="margin-left: 30px; font-size: 20px; color: black"
-                                           href="@Url.Action("DoiMatKhau", "Customer")">Đổi mật khẩu
-                                        </a>
-
-                                        <!--<a style="margin-left: 30px; font-size: 20px; color: black"
-                                           href="@Url.Action("DanhSachDonDatPhong", "Home")">Hủy đơn đặt phòng
-                                        </a>-->
-
-                                        <a style="margin-left: 30px; font-size: 20px; color: black"
-                                           onclick="return confirm('Quý khách muốn đăng xuất?');"
-                                           href="@Url.Action("DangXuat", "Customer")">Đăng xuất
-                                        </a>
-
-                                    </span> 
-                            }
-                            else
-                            {
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                   href="@Url.Action("DangNhap", "Customer")">Đăng nhập
-                                </a>
-
-                                <a style="margin-left: 30px; font-size: 20px; color: black"
-                                   href="@Url.Action("DangKyTaiKhoan", "Customer")">Đăng ký tài khoản
-                                </a> 
-                            } 
-                        }
-
-                    </div>
-                </div>
+            </div>
+        </div>
 
     </header>
             @RenderBody()
 
     <footer>
-        <div class="col-md-12" style="height: 400px; background-color: #e1f0e7; ">
-            <div class="col-md-6">
-                <img src="/Content/Home/images/Index/giaodien8.jpg" width="900px;" />
+        <div class="col-md-12" style="height: 400px; background-color: #e1f0e7; margin-bottom: 12px;">
+
+            <div class="col-md-4">
+                <img src="/Content/Home/images/Index/giaodien8.jpg" width="600px;" />
             </div>
-            <div class="col-md-6">
+
+            <div class="col-md-8">
                 <h3 style="margin: 15px;">
                     Đây là bước triển khai đầu tiên của Chuỗi nhà nghỉ, khách sạn Lê An trong tiến trình phát triển tối ưu dòng
                     sản phẩm "Tổ hợp giải trí, du lịch và nghỉ dưỡng sinh thái" tại các điểm đến tiềm năng - mang thương hiệu
                     " Lê An Green Land".
                 </h3>
+
+                <p>
+                    Tọa lạc tại xóm Đồng Nôn, xã Diễn Lâm, huyện Diễn Châu, tỉnh Nghệ An, cách TP.Vinh 60km và cách thủ đô Hà Nội khoảng
+                    240km chạy xe dọc theo hai tuyến Quốc lộ 1A và Quốc lộ 48, Lê An GreenLand Diễn Lâm được xây dựng và phát triển với 8
+                    dịch vụ độc đáo: Thăm quan khám phá thiện nhân hoang dã(Vườn thú hoang dã, Safari, Vườn thú cưng...), 
+                    Du lịch thể thao, giải trí(Công viên nước, Công viên giải trí, Sân golf, Sân tennis...), Du lịch nghỉ dưỡng trị liệu
+                    (Tắm bùn khoáng nóng, Spa, Foot Massage...), Trải nghiệm ẩm thực(Nhà hàng Âu Á, Phố Ẩm thực...), Trải nghiệm văn hóa 
+                    (Trải nghiệm làm nông nghiệp, làng nghề) và Khu đền đài vãn cảnh tâm linh.
+
+                    Bên cạnh đó, nằm trong quần thể khu nghỉ dưỡng Lê An GreenLand Diễn Lâm, khách sạn Lê An đạt tiêu chuẩn 2 sao với 18 phòng
+                    Luxury, cùng các căn biệt thự duyên dáng bên hồ, tạo nên điểm nhấn hài hòa giữa đường nét kiến trúc hiện đại kết nối với
+                    không gian thiên nhiên, mang đến cho du khách một kỳ nghỉ thực sự tiện nghi và cảm xúc.
+                </p>
             </div>
 
         </div>

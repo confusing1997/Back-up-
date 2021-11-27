@@ -11,7 +11,8 @@ namespace QLKS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblKhachHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +22,7 @@ namespace QLKS.Models
             this.tblTinNhans = new HashSet<tblTinNhan>();
         }
     
+        
         public string ma_kh { get; set; }
         public string mat_khau { get; set; }
         public string ho_ten { get; set; }
