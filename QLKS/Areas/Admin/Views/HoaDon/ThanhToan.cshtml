@@ -81,6 +81,7 @@
                             <td>@Model.tblPhieuDatPhong.tblPhong.tblLoaiPhong.ti_le_phu_thu</td>
 
                             <td>@ViewBag.tong_tien</td>
+
                         <tr>
 
                                 
@@ -102,11 +103,11 @@
                                         Tên món ăn
                                     </th>
                                     <th>
-                                        Giá
+                                        Đơn giá
                                     </th>
                                         
                                     <th>
-                                        Số lượng
+                                        Số lượng khách đặt
                                     </th>
                                     <th>
                                         Tổng tiền
@@ -148,17 +149,14 @@
 
 
             <div class="form-group">
-                @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-8" })
+                @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-8", style="font-weight: bold; font-size: 22px;" })
                 <div class="col-md-6">
                     @Html.TextBox("tong_tien", ((Double)ViewBag.tong_tien).ToString("C"), new { @class = "form-control", @readonly = "readonly" })
                 </div>
             </div>
 
-
-    if (Model.ma_tinh_trang == 1)
-    {
-        <input type="submit" value="Khách hàng trả phòng" class="btn-lg" />
-    }
+            <input type="submit" value="Khách hàng trả phòng" class="btn-lg" onclick="return confirm('Khách hàng trả phòng?')"/>
+    
 }
 
 

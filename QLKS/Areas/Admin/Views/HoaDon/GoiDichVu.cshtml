@@ -6,12 +6,13 @@
 }
 
 <div class="col-md-12" style="background-color: #b1c3f0;">
-    <div>Gọi dịch vụ</div>
+    <div>Gọi dịch vụ </div>
 </div>
 
 <div class="col-md-12">
     <div>
         <table class="table table-bordered">
+
             <thead>
                 <tr>
                     <th>
@@ -26,11 +27,13 @@
                     <th>
                         Giá
                     </th>
+                    
                     <th>
                         Thao tác
                     </th>
                 </tr>
             </thead>
+
             <tbody>
                 @{ 
                     int stt = 0;
@@ -39,7 +42,9 @@
                 {
                     stt++;
                 <tr>
-                    <td>@stt</td>
+                    <td>
+                        @stt
+                    </td>
                     <td>
                         <img src="@Html.DisplayFor(modelItem => item.anh)" width="50px" />
                     </td>
@@ -66,6 +71,7 @@
              aria-hidden="true" style="margin-top: 15%;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+
                     @using (@Html.BeginForm("XacNhanGoiDichVu", "HoaDon"))
                     {
                         <div class="modal-header">
@@ -83,9 +89,10 @@
 
                         <div class="modal-footer">
                             <button class="btn btn-primary" onclick="return checkDV()">Xác nhận</button>
-                            <button class="btn btn-default" type="button" data-dismiss="modal">Hủy</button>
+                            @*<button class="btn btn-default" type="button" data-dismiss="modal">Hủy</button>*@
                         </div>
                     }
+
                 </div>
             </div>
         </div>
@@ -105,7 +112,7 @@
             <thead>
                 <tr>
                     <th>
-                        Tên đồ
+                        Tên đồ ăn/ uống
                     </th>
                                 
                     <th>
@@ -135,6 +142,7 @@
 <script>
 
     var hang = 0;
+
     function chonDo(ma_dv, tk) {
         var maDV = $('#ma_dv');
         maDV.val(ma_dv);
@@ -143,13 +151,17 @@
     
     function checkDV() {
         var soLuong = document.getElementById("so_luong").value;
-        if (soLuong % 1 === 0 && soLuong >= 0) {
-        } else {
-            alert("Mời bạn nhập lại !");
+
+        if (soLuong % 1 === 0 && soLuong > 0) {
+        }
+        else {
+            alert("vui lòng điền số lượng lớn hơn 0 !");
             return false;
         }
+
+
         if (soLuong > hang) {
-            alert("Số lượng nhập lớn hơn số lượng hàng !");
+            alert("Số lượng nhập lớn hơn số lượng có thể phục vụ !");
             return false;
         }
         return true;

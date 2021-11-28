@@ -20,7 +20,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         public ActionResult Index() 
         {
             var tblhd = 
-                db.tblHoaDons.Where(t=>t.ma_tinh_trang==2).
+                db.tblHoaDons.Where(t => t.ma_tinh_trang == 2).
                 Include(t => t.tblNhanVien).
                 Include(t => t.tblPhieuDatPhong).
                 Include(t => t.tblTinhTrangHoaDon).ToList();
@@ -213,10 +213,11 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             }
 
             GoiDichVuModel mod = new GoiDichVuModel();
-            mod.dsDichVu = db.tblDichVus.Where(t=>t.ton_kho > 0).ToList();
+            mod.dsDichVu = db.tblDichVus.Where(t => t.ton_kho > 0).ToList();
             mod.dsDvDaDat = db.tblDichVuDaDats.Where(u => u.ma_hd == id).ToList();
             ViewBag.ma_hd = id;
             ViewBag.so_phong = db.tblHoaDons.Find(id).tblPhieuDatPhong.tblPhong.so_phong;
+
             return View(mod);
         }
 
@@ -245,6 +246,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                         break;
                     }
                 }
+
                 if (!check)
                 {
                     tblDichVuDaDat dv = new tblDichVuDaDat();
@@ -254,7 +256,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                     db.tblDichVuDaDats.Add(dv);
                 }
                 tblDichVu dichvu = db.tblDichVus.Find(madv);
-                dichvu.ton_kho -= sol;
+                /*dichvu.ton_kho -= sol;*/
                 db.SaveChanges();
             }
             catch
@@ -304,7 +306,6 @@ namespace QLKS.Areas.Admin.Controllers.Admin
             {
                 ViewBag.result = "error";
             }
-            ViewBag.ma_hd = ma_hd;
             return View();
         }
 
