@@ -31,21 +31,31 @@ namespace QLKS.Controllers.Home
         {
             if (ModelState.IsValid)
             {
-                if (db.tblKhachHangs.Find(tblKhach.ma_kh) == null 
-                    && db.tblKhachHangs.Where(m => m.mail.Equals(tblKhach.mail)).FirstOrDefault() == null)
+                if (db.tblKhachHangs.Where(d => d.ma_kh.Equals(tblKhach.ma_kh)).FirstOrDefault() == null 
+                    && db.tblKhachHangs.Where(a => a.mail.Equals(tblKhach.mail)).FirstOrDefault() == null
+                    && db.tblKhachHangs.Where(b => b.cmt.Equals(tblKhach.cmt)).FirstOrDefault() == null
+                    && db.tblKhachHangs.Where(c => c.sdt.Equals(tblKhach.sdt)).FirstOrDefault() == null)
                 {
                     db.tblKhachHangs.Add(tblKhach);
                     db.SaveChanges();
                     Session["KH"] = tblKhach;
                     return RedirectToAction("Index", "Home");
                 }
-                else if (db.tblKhachHangs.Find(tblKhach.ma_kh) != null)
+                else if (db.tblKhachHangs.Where(d => d.ma_kh.Equals(tblKhach.ma_kh)).FirstOrDefault() != null)
                 {
-                    ModelState.AddModelError(nameof(tblKhachHang.ma_kh), "Tài khoản đã có người sử dụng");
+                    ModelState.AddModelError(nameof(tblKhachHang.ma_kh), "Tài khoản đã có người sử dụng !");
                 }
-                else if (db.tblKhachHangs.Where(m => m.mail.Equals(tblKhach.mail)).FirstOrDefault() != null)
+                else if (db.tblKhachHangs.Where(b => b.cmt.Equals(tblKhach.cmt)).FirstOrDefault() != null)
                 {
-                    ModelState.AddModelError(nameof(tblKhachHang.mail), "Địa chỉ email đã có người sử dụng");
+                    ModelState.AddModelError(nameof(tblKhachHang.cmt), "Số căn cước công dẫn đã tồn tại !");
+                }
+                else if (db.tblKhachHangs.Where(c => c.sdt.Equals(tblKhach.sdt)).FirstOrDefault() != null)
+                {
+                    ModelState.AddModelError(nameof(tblKhach.sdt), "Số điện thoại đã có người sử dụng !");
+                }
+                else if (db.tblKhachHangs.Where(a => a.mail.Equals(tblKhach.mail)).FirstOrDefault() != null)
+                {
+                    ModelState.AddModelError(nameof(tblKhachHang.mail), "Địa chỉ email đã có người sử dụng !");
                 }
             }
             return View(tblKhach);
@@ -108,9 +118,13 @@ namespace QLKS.Controllers.Home
                     Session["KH"] = khach;
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                else if (db.tblKhachHangs.Where(a => a.ma_kh.Equals(tblkhach.ma_kh)).FirstOrDefault() == null)
                 {
-                    ModelState.AddModelError("", "Thông tin đăng nhập không hợp lệ !");
+                    ModelState.AddModelError(nameof(tblkhach.ma_kh), "Tài khoản không hợp lệ !");
+                } 
+                else if (db.tblKhachHangs.Where(b => b.mat_khau.Equals(tblkhach.mat_khau)).FirstOrDefault() == null)
+                {
+                    ModelState.AddModelError(nameof(tblkhach.mat_khau), "Mật khẩu không hợp lệ !");
                 }
             }
 

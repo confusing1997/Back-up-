@@ -38,7 +38,7 @@
                             <td>@item.tblPhieuDatPhong.ngay_ra.Value.ToShortDateString()</td>
                             <td>@item.tblTinhTrangHoaDon.mo_ta</td>
                             <td>
-                                <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })">
+                                <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })" class="btn btn-primary">
                                     Thanh toán hóa đơn
                                 </a>
                             </td>

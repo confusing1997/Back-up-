@@ -49,7 +49,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tên phòng đã tồn tại !");
+                    ModelState.AddModelError(nameof(tblphong.so_phong), "Tên phòng đã tồn tại !");
                 }
             }
             ViewBag.loai_phong = new SelectList(db.tblLoaiPhongs, "loai_phong", "mo_ta");
