@@ -169,6 +169,7 @@ namespace QLKS.Areas.Admin.Controllers.Admin
                 songay++;
             if (ngay_ra > dateE)
                 songay++;
+            
 
             var ti_le_phu_thu = tblHoaDon.tblPhieuDatPhong.tblPhong.tblLoaiPhong.ti_le_phu_thu;
             var so_ngay_phu_thu = Math.Abs(Math.Ceiling((ngay_ra - ngay_du_kien).TotalDays));

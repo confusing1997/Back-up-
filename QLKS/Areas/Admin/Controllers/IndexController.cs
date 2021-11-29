@@ -69,13 +69,19 @@ namespace QLKS.Areas.Admin.Controllers
                     }
                     return RedirectToAction("Index", "Index");
                 }
-                else
+                else if (db.tblNhanViens.Where(a => a.tai_khoan.Equals(tblnhanvien.tai_khoan)).FirstOrDefault() == null)
                 {
-                    ModelState.AddModelError("", "Invalid information !");
+                    ModelState.AddModelError(nameof(tblnhanvien.tai_khoan), "Sai tên tài khoản !");
+                }
+                else if (db.tblNhanViens.Where(b => b.mat_khau.Equals(tblnhanvien.mat_khau)).FirstOrDefault() == null)
+                {
+                    ModelState.AddModelError(nameof(tblnhanvien.mat_khau), "Mật khẩu không chính xác !");
                 }
             }
+
             return View(tblnhanvien);
         }
+
         [HttpGet]
         public ActionResult Login() 
         {
@@ -171,7 +177,7 @@ namespace QLKS.Areas.Admin.Controllers
             try
             {
                 DateTime ngay = (DateTime)db.tblPhieuDatPhongs.Where(a => a.ma_tinh_trang == 1
-                && a.ma_phong == tblphieudatphong.tblPhong.ma_phong).Select(a => a.ngay_vao).FirstOrDefault();
+                && a.ma_phong == tblphieudatphong.tblPhong.ma_phong).Select(a => a.ngay_vao).OrderBy(a => a.Value).First();
 
                 str = ngay.ToString("dddd, dd MMMM yyyy");
             }
@@ -179,6 +185,7 @@ namespace QLKS.Areas.Admin.Controllers
             {
 
             }
+            ViewBag.str = str;
             return View(tblphieudatphong);
         }
 

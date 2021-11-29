@@ -6,7 +6,7 @@
 }
 
 <div class="col-md-12" style="background-color: #b1c3f0;">
-    <div style="margin-left: 10px; font-size: 18px;">Đổi mật khẩu</div>
+    <div style="margin-left: 10px; font-size: 18px;">Thông tin cá nhân</div>
 </div>
 
 <div style="margin-top: 20px;">
@@ -17,6 +17,7 @@
 
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                 @Html.HiddenFor(model => model.ma_nv)
 
                 <div class="form-group hidden">

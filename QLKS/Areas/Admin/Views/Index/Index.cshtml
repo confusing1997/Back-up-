@@ -68,35 +68,26 @@
 
                     <tr>
                         <td style="text-align: center;">@stt</td>
+
                         <td style="text-align: center;">@item.tblLoaiPhong.mo_ta</td>
+
                         <td style="text-align: center;">@item.so_phong</td>
+
                         <td style="text-align: center;">@item.tblTang.ten_tang</td>
+
                         <td style="text-align: center;">
                             <img src="@item.tblLoaiPhong.anh" width="80px" height="50px" />
                         </td>
 
-
-                        @if (item.ma_tinh_trang == 1)
-                        {
-                            <td style="text-align: center;">
-                                <div>@item.tblTinhTrangPhong.mo_ta</div>
-                            </td>
-                        }
-                        else if (item.ma_tinh_trang == 2)
-                        {
-                            <td style="text-align: center;">
-                                <div>@item.tblTinhTrangPhong.mo_ta</div>
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <div>@item.tblTinhTrangPhong.mo_ta</div>
-                            </td>
-                        }
+                        <td style="text-align: center;">
+                            <div>@item.tblTinhTrangPhong.mo_ta</div>
+                        </td>
+                        
                     </tr>
                 }
             }
         </tbody>
+
     </table>
+
 </div>

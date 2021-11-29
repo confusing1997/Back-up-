@@ -12,14 +12,15 @@
 <div>
     <div>
         <table class="table table-bordered">
+
             <thead>
                 <tr>
                     <th>Tên phòng</th>
-                    <th>Loại phòng</th>
-                    <th>Vị trí</th>
-                    <th>Thời gian nhận phòng</th>
-                    <th>Thời gian trả phòng</th>
-                    <th>Thông tin</th>
+                    <th>Số giường</th>
+                    <th>Vị trí phòng</th>
+                    <th>Thời gian khách nhận phòng</th>
+                    <th>Thời gian khách trả phòng</th>
+                    <th>Tình trạng hóa đơn</th>
                     <th>Thao tác</th>
                 </tr>
             </thead>
@@ -38,7 +39,8 @@
                             <td>@item.tblPhieuDatPhong.ngay_ra.Value.ToShortDateString()</td>
                             <td>@item.tblTinhTrangHoaDon.mo_ta</td>
                             <td>
-                                <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })" class="btn btn-primary">
+                                <a href="@Url.Action("ThanhToan", "HoaDon", new { id = item.ma_hd })" 
+                                   class="btn btn-primary">
                                     Thông tin hóa đơn
                                 </a>
                             </td>

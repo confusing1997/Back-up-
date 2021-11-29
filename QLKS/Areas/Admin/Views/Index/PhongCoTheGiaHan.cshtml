@@ -11,55 +11,49 @@
 </div>
 
 <div>
-    <div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Số giường</th>
-                    <th>Tên phòng</th>
-                    <th>Vị trí phòng</th>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Số giường</th>
+                <th>Tên phòng</th>
+                <th>Vị trí phòng</th>
+                <th>Tình trạng phòng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
 
-                    <th>Tình trạng phòng</th>
-                    @if (Session["NV"] != null && ((QLKS.Models.tblNhanVien)Session["NV"]).ma_chuc_vu == 3)
-                    {
-                        <th>Thao tác</th>}
+        <tbody>
+            @{ 
+                int stt = 0; 
+            }
 
-
-                </tr>
-            </thead>
-
-            <tbody>
-                @{ 
-                    int stt = 0; 
-                }
-
-                @foreach (var item in Model)
+            @foreach (var item in Model)
+            {
+                if (item.tblPhieuDatPhong.tblPhong.ma_tinh_trang == 2)
                 {
-                    if (item.tblPhieuDatPhong.tblPhong.ma_tinh_trang == 2)
-                    {
-                        stt++;
+                    stt++;
 
-                        <tr>
-                            <td>@stt</td>
-                            <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>
-                            <td>@item.tblPhieuDatPhong.tblPhong.so_phong</td>
-                            <td>@item.tblPhieuDatPhong.tblPhong.tblTang.ten_tang</td>
-                            <td>
-                                <span>
-                                    @item.tblPhieuDatPhong.tblPhong.tblTinhTrangPhong.mo_ta
-                                </span>
-                            </td>
+                    <tr>
+                        <td>@stt</td>
+                        <td>@item.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta</td>
+                        <td>@item.tblPhieuDatPhong.tblPhong.so_phong</td>
+                        <td>@item.tblPhieuDatPhong.tblPhong.tblTang.ten_tang</td>
+                        <td>
+                            <span>
+                                @item.tblPhieuDatPhong.tblPhong.tblTinhTrangPhong.mo_ta
+                            </span>
+                        </td>
 
-                            <td>
-                                <a href="@Url.Action("GiaHanPhong", "Index", new { id = item.ma_hd })" class="btn btn-primary">
-                                    Gia hạn phòng
-                                </a>
-                            </td>
-                        </tr>
-                    }
+                        <td>
+                            <a href="@Url.Action("GiaHanPhong", "Index", new { id = item.ma_hd })" 
+                               class="btn btn-primary">
+                                Gia hạn phòng
+                            </a>
+                        </td>
+                    </tr>
                 }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
 </div>
