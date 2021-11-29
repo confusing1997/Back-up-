@@ -213,6 +213,37 @@ namespace QLKS.Areas.Admin.Controllers
             return View();
         }
 
+        public ActionResult SuaDichVu (String ma_hd, String edit_id, String edit_so_luong)
+        {
+            if (ma_hd == null || edit_id == null || edit_so_luong == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            tblDichVuDaDat dvdd = db.tblDichVuDaDats.Find(Int32.Parse(edit_id));
+
+            int soLuong = Int32.Parse(edit_so_luong);
+
+            tblDichVu dv = db.tblDichVus.Find(dvdd.ma_dv);
+
+            int chenhLech = (int)(soLuong - dvdd.so_luong);
+
+            if (chenhLech > dv.ton_kho)
+            {
+                return RedirectToAction("GoiDichVu", "HoaDon", new { id = ma_hd });
+            }
+            else
+            {
+                dvdd.so_luong = soLuong;
+                dv.ton_kho -= chenhLech;
+                db.Entry(dvdd).State = EntityState.Modified;
+                db.Entry(dv).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            
+            return RedirectToAction("GoiDichVu", "HoaDon", new { id = ma_hd });
+        }
+
         
 
 

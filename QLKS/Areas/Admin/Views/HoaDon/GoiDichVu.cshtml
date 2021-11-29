@@ -132,10 +132,48 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.so_luong)
                         </td>
+                        <!--<td>
+                            <a href="#" data-toggle="modal"
+                               onclick="suaDichVu(@item.id, @item.so_luong, @item.tblDichVu.gia)"
+                               data-target="#modeledit">
+                               Edit
+                            </a>
+                        </td>-->
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal" 
+     id="modeledit" 
+     style="margin-top: 15%;"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (@Html.BeginForm("SuaDichVu", "Index"))
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title">Số lượng khách gọi</h5>
+                    <button type="button" data-dismiss="modal">
+                        <span aria-hidden="true" style="color: red;">X</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @Html.TextBox("ma_hd", (int)ViewBag.ma_hd, new { @class = "form-control", style = "display:none" })
+                    @Html.TextBox("don_gia", null, new { @class = "form-control", style = "display:none", type = "number" })
+                    @Html.TextBox("edit_id", null, new { @class = "form-control", style = "display:none" }) 
+                    Số lượng
+                    @Html.Editor("edit_so_luong", new { htmlAttributes = new { @class = "form-control", @type = "number" } }) 
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" onclick="return checkInt2()">Xác nhận</button>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -166,6 +204,34 @@
         }
         return true;
     }
+
+
+    function suaDichVu(id, so_luong, don_gia) {
+        var txtSL = document.getElementById("edit_so_luong");
+        var txtId = document.getElementById("edit_id");
+        var txtGia = document.getElementById("don_gia");
+        txtGia.value = don_gia
+        txtSL.value = so_luong;
+        txtId.value = id;
+    }
+
+
+    function checkInt2() {
+        var n = document.getElementById("edit_so_luong");
+        var x = document.getElementById("don_gia_dsdd");
+        var txtGia = document.getElementById("don_gia").value;
+        var soLg = document.getElementById("so_luong_dsdd");
+
+        if (n.value % 1 === 0 && n.value > 0) {
+
+        } else {
+            alert("Thông tin nhập không hợp lệ !");
+            return false;
+        }
+        return true;
+    }
+
+
     
 </script>
 
