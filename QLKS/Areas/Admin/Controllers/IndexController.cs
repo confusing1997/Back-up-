@@ -213,7 +213,7 @@ namespace QLKS.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult SuaDichVu (String ma_hd, String edit_id, String edit_so_luong)
+        public ActionResult SuaDichVu(String ma_hd, String edit_id, String edit_so_luong)
         {
             if (ma_hd == null || edit_id == null || edit_so_luong == null)
             {
@@ -241,6 +241,15 @@ namespace QLKS.Areas.Admin.Controllers
                 db.SaveChanges();
             }
             
+            return RedirectToAction("GoiDichVu", "HoaDon", new { id = ma_hd });
+        }
+
+        public ActionResult XoaDichVu(String ma_hd, String del_id)
+        {
+            tblDichVuDaDat dvdd = db.tblDichVuDaDats.Find(Int32.Parse(del_id));
+            db.tblDichVuDaDats.Remove(dvdd);
+            db.SaveChanges();
+
             return RedirectToAction("GoiDichVu", "HoaDon", new { id = ma_hd });
         }
 

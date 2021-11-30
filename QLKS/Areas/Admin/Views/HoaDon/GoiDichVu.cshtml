@@ -22,10 +22,10 @@
                         Mô tả
                     </th>
                     <th>
-                        Tên dịch vụ
+                        Tên đồ ăn/ đồ uống
                     </th>
                     <th>
-                        Giá
+                        Đơn giá
                     </th>
                     
                     <th>
@@ -54,6 +54,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.gia)
                     </td>
+                    
                     <td>
                         <a href="#"
                            data-toggle="modal" 
@@ -139,6 +140,13 @@
                                Edit
                             </a>
                         </td>-->
+                        <!--<td>
+                            <a href="#" data-toggle="modal"
+                               onclick="xoaDichVu(@item.id)"
+                               data-target="#modeldelete">
+                                Delete
+                            </a>
+                        </td>-->
                     </tr>
                 }
             </tbody>
@@ -170,12 +178,41 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-primary" onclick="return checkInt2()">Xác nhận</button>
+                    <button class="btn btn-primary" onclick="return checkSuaDichVu()">Xác nhận</button>
                 </div>
             }
         </div>
     </div>
 </div>
+
+
+<div class="modal" 
+     id="modeldelete"
+     style="margin-top: 15%;"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            @using (@Html.BeginForm("XoaDichVu", "Index"))
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title">Bạn có thực sự muốn xóa dịch vụ?</h5>
+                    <button class="close" type="button" data-dismiss="modal">
+                        <span aria-hidden="true" style="color: red;">X</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    @Html.TextBox("ma_hd", (int)ViewBag.ma_hd, new { @class = "form-control", style = "display:none" })
+                    @Html.TextBox("del_id", null, new { @class = "form-control", style = "display:none" })
+                    <div class="modal-footer">
+                        <button class="btn btn-danger">Xóa dịch vụ</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 
 <script>
 
@@ -216,7 +253,13 @@
     }
 
 
-    function checkInt2() {
+    function xoaDichVu(id) {
+        var txtId = document.getElementById("del_id");
+        txtId.value = id;
+    }
+
+
+    function checkSuaDichVu() {
         var n = document.getElementById("edit_so_luong");
         var x = document.getElementById("don_gia_dsdd");
         var txtGia = document.getElementById("don_gia").value;
