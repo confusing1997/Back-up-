@@ -13,7 +13,9 @@
     @using (Html.BeginForm("Index", "HoaDon", FormMethod.Post))
     {
         <div style="background-color: #bad0f5; ">
+
             <h3>Tổng hợp doanh thu</h3>
+
             <div class="col-md-3">
                 <label for="ngay_bat_dau" style="font-weight: bold;">Từ ngày</label>
                 @Html.TextBox("ngay_vao", null, new { @type="date", @class="form-control" })
@@ -25,7 +27,10 @@
             </div>
 
             <div class="col-md-6" style="margin: 5px;">
-                <input type="submit" onclick="return checkTimHD();" class="btn btn-primary" value="Search"/>
+                <input type="submit" 
+                       onclick="return checkTimHD();" 
+                       class="btn btn-primary" 
+                       value="Search"/>
             </div>
         </div>
     }
@@ -36,16 +41,15 @@
 
     <div>
 
-        <h5 style="font-weight: bold;">Tổng doanh thu cả hệ thống: @ViewBag.tongAllHoaDon VNĐ</h5>
+        <h5 style="font-weight: bold;">Tổng doanh thu cả hệ thống: @ViewBag.tongAllHoaDon </h5>
 
         <table class="table table-bordered">
+
             <thead>
+
                 <tr>
                     <th style="text-align: center;">
                         STT
-                    </th>
-                    <th style="text-align: center;">
-                        Tình trạng hóa đơn
                     </th>
                     <th style="text-align: center;">
                         Khách thuê phòng
@@ -62,8 +66,6 @@
                     <th style="text-align: center;">
                         Tổng hóa đơn
                     </th>
-
-
                 </tr>
             </thead>
 
@@ -80,9 +82,6 @@
                     <tr>
                         <td style="text-align: center;">
                             @stt
-                        </td>
-                        <td style="text-align: center;">
-                            @Html.DisplayFor(Item => item.tblTinhTrangHoaDon.mo_ta)
                         </td>
                         <td style="text-align: center;">
                             @Html.DisplayFor(Item => item.tblPhieuDatPhong.tblKhachHang.ho_ten)
@@ -108,11 +107,11 @@
 
 <script>
     function checkTimHD() {
-        var ngay_vao = $("#ngay_vao").val().split("-");
-        var dateS = new Date(ngay_vao[2], ngay_vao[1], ngay_vao[0]);
+        var ngay_vao = $("#ngay_vao").val().split("/");
+        var dateS = new Date(ngay_vao[2], ngay_vao[1] - 1, ngay_vao[0]);
 
-        var ngay_ket_thuc = $("#ngay_ket_thuc").val().split("-");
-        var dateE = new Date(ngay_ket_thuc[2], ngay_ket_thuc[1], ngay_ket_thuc[0]);
+        var ngay_ket_thuc = $("#ngay_ket_thuc").val().split("/");
+        var dateE = new Date(ngay_ket_thuc[2], ngay_ket_thuc[1] - 1, ngay_ket_thuc[0]);
 
         if (ngay_vao == "" || ngay_ket_thuc == "") {
             return false;

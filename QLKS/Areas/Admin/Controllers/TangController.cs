@@ -50,6 +50,11 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                if (tblTang.ten_tang == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 db.tblTangs.Add(tblTang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +87,12 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                if (tblTang.ten_tang == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+
                 if (db.tblTangs.Where(a => a.ten_tang.Equals(tblTang.ten_tang)).FirstOrDefault() == null)
                 {
                     db.Entry(tblTang).State = EntityState.Modified;

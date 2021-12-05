@@ -10,12 +10,15 @@
 </div>
 
 <div style="margin-top: 20px;">
+
     @using (Html.BeginForm("Create", "DichVu", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
                 <div class="form-horizontal">
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                     <div class="form-group">
                         @Html.Label("Tên món ăn", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-6">
@@ -57,7 +60,7 @@
 
                     <div class="form-group">
                         <div class="col-md-6">
-                            <input type="submit" onclick="return checkInfo()" value="Xác nhận" class="btn btn-primary" />
+                            <input type="submit"  value="Xác nhận" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>
@@ -66,26 +69,17 @@
 
 
 <script>
+
     function checkInfo() {
 
-        var ten = $('#ten_dv').val();
+        var ten = $("#ten_dv").val();
         var gia = $('#gia').val();
         var soluong = $('#ton_kho').val();
         var donvi = $('#don_vi').val();
 
-        if (ten == '') {
-            alert('Tên món ăn không được để trống !');
-            return false;
-        }
-        if (gia == '') {
-            alert('Đơn giá không được để trống !');
-            return false;
-        if (donvi == '') {
-            alert('Đơn ví tính không được để trống !');
-            return false;
-        }
-        if (soluong == '') {
-            alert('Số lượng có thể phục vụ không được để trống !');
+        if (ten == "" || gia == "" || donvi == "" || soluong == "")
+        {
+            alert("Dữ liệu không được để trống !");
             return false;
         }
         return true;

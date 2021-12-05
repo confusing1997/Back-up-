@@ -22,7 +22,8 @@ namespace QLKS.Areas.Admin.Controllers
 
             var tblphong = db.tblPhongs.Where(a => a.ma_tinh_trang < 5).ToList();
 
-            foreach (var phong in tblphong) { 
+            foreach (var phong in tblphong) 
+            { 
                 if (phong.ma_tinh_trang == 1)
                 {
                     soPhongTrong += 1;

@@ -6,14 +6,18 @@
 }
 
 <div class="col-md-12" style="background-color: #b1c3f0;">
-    <div>Thanh toán hóa đơn</div>
+    <h5>
+        Do phòng @Model.tblPhieuDatPhong.tblPhong.so_phong có 
+        @Model.tblPhieuDatPhong.tblPhong.tblLoaiPhong.mo_ta
+        nên phí phát sinh là @Model.tblPhieuDatPhong.tblPhong.tblLoaiPhong.ti_le_phu_thu% (nếu khách hàng thanh toán chễ hạn hoặc trả phòng sớm)
+    </h5>
 </div>
 
+<div>
 @using (Html.BeginForm("XacNhanThanhToan", "HoaDon"))
 {
     @Html.AntiForgeryToken()
         
-        <div>
             <div class="col-md-12">
 
                 <div>
@@ -46,15 +50,17 @@
 
                             <th>Thời gian thanh toán hóa đơn</th>
 
-                            <th>Đơn giá</th>
+                            <th>Giá phòng</th>
 
                             <th>Số ngày ở</th>
 
-                            <th>Thành tiền</th>
+                            <th>Tiền phòng</th>
 
                             <th>Số ngày chễ hạn</th>
 
                             <th>Phụ thu</th>
+
+                            <th>Tiền thu thêm</th>
 
                         </tr>
 
@@ -77,85 +83,84 @@
 
                             <td>@ViewBag.so_ngay_phu_thu</td>
 
+                            <td>@Model.tblPhieuDatPhong.tblPhong.tblLoaiPhong.ti_le_phu_thu</td>
+
                             <td>@ViewBag.phu_thu</td>
-
                         <tr>
-
-                                
                     </table>
                 </div>
             </div>
 
-                <div class="col-md-12">
+            <div class="col-md-12">
 
-                        <div class="col-md-12" style="background-color: #b1c3f0;">
-                            <div>Món ăn đã gọi</div>
-                        </div>
-
-                        <div>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>
-                                        Tên món ăn
-                                    </th>
-                                    <th>
-                                        Đơn giá
-                                    </th>
-                                        
-                                    <th>
-                                        Số lượng khách đặt
-                                    </th>
-                                    <th>
-                                        Tổng tiền
-                                    </th>
-                                </tr>
-                                @{
-                                    List<QLKS.Models.tblDichVuDaDat> ds = (List<QLKS.Models.tblDichVuDaDat>)ViewBag.list_dv;
-                                    List<double> tt = (List<double>)ViewBag.list_tt;
-                                    int stt = 0;
-                                    for (int i = 0; i < ds.Count; i++)
-                                    {
-                                        stt++;
-                                        <tr>
-                                            <td>
-                                                @stt
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => ds[i].tblDichVu.ten_dv)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => ds[i].tblDichVu.gia)
-                                            </td>
-                                                
-                                            <td>
-                                                @Html.DisplayFor(modelItem => ds[i].so_luong)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => tt[i])
-                                            </td>
-                                        </tr>
-                                    }
-                                }
-                                
-                            </table>
-                        </div>
-                    </div>
+                <div class="col-md-12" style="background-color: #b1c3f0;">
+                    <h5>Món ăn đã phục vụ</h5>
                 </div>
+
+                <div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>STT</th>
+                            <th>
+                                Tên món ăn
+                            </th>
+                            <th>
+                                Đơn giá
+                            </th>
+                                        
+                            <th>
+                                Số lượng khách đặt
+                            </th>
+                            <th>
+                                Tổng tiền
+                            </th>
+                        </tr>
+                        @{
+                            List<QLKS.Models.tblDichVuDaDat> ds = (List<QLKS.Models.tblDichVuDaDat>)ViewBag.list_dv;
+                            List<double> tt = (List<double>)ViewBag.list_tt;
+                            int stt = 0;
+                            for (int i = 0; i < ds.Count; i++)
+                            {
+                                stt++;
+                                <tr>
+                                    <td>
+                                        @stt
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].tblDichVu.ten_dv)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].tblDichVu.gia)
+                                    </td>
+                                                
+                                    <td>
+                                        @Html.DisplayFor(modelItem => ds[i].so_luong)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => tt[i])
+                                    </td>
+                                </tr>
+                            }
+                        }
+                                
+                    </table>
+                </div>
+            </div>
                     
 
 
-            <div class="form-group">
-                @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-8", style="font-weight: bold; font-size: 22px;" })
-                <div class="col-md-6">
-                    @Html.TextBox("tong_tien", ((Double)ViewBag.tong_tien).ToString("C"), new { @class = "form-control", @readonly = "readonly" })
-                </div>
+        <div class="form-group">
+            @Html.Label("Tổng tiền", htmlAttributes: new { @class = "control-label col-md-8", style="font-weight: bold; font-size: 22px;" })
+            <div class="col-md-6">
+                @Html.TextBox("tong_tien", ((Double)ViewBag.tong_tien).ToString("C"), new { @class = "form-control", @readonly = "readonly" })
             </div>
+        </div>
 
-            <input type="submit" value="Khách hàng trả phòng" class="btn-lg" onclick="return confirm('Khách hàng trả phòng?')"/>
+        <input type="submit" value="Khách hàng trả phòng" class="btn btn-dark" 
+               onclick="return confirm('Khách hàng trả phòng?')"/>
     
 }
-
+</div>
 
 
 

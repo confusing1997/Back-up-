@@ -16,7 +16,9 @@ namespace QLKS.Areas.Admin.Controllers
         // GET: KhachHang
         public ActionResult Index(string searching)
         {
-            return View(db.tblKhachHangs.Where(a => searching == null || a.ho_ten.Contains(searching) || a.mail.Contains(searching)).ToList());
+            return View(db.tblKhachHangs.Where(a => searching == null 
+                        || a.ho_ten.Contains(searching) 
+                        || a.mail.Contains(searching)).ToList());
         }
 
         public ActionResult ThemKhachHang ()
@@ -30,6 +32,12 @@ namespace QLKS.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (tblkhachhang.ma_kh == null || tblkhachhang.mat_khau == null || tblkhachhang.ho_ten == null || tblkhachhang.cmt == null
+                                                || tblkhachhang.sdt == null || tblkhachhang.mail == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 if (db.tblKhachHangs.Find(tblkhachhang.ma_kh) == null && 
                     db.tblKhachHangs.Where(x => x.mail == tblkhachhang.mail).FirstOrDefault() == null)
                 {

@@ -38,6 +38,12 @@ namespace QLKS.Controllers
         [HttpPost]
         public ActionResult TimPhongTrong (String datestart, String dateend)
         {
+            if (datestart == "" || dateend == "")
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest); 
+            }
+
+
             Session["ngayVao"] = datestart;
             Session["ngayRa"] = dateend;
             Session["ds_phong"] = null;

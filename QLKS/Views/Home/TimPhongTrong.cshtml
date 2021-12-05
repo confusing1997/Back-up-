@@ -15,23 +15,24 @@
     }
 </style>
 
-<div class="col-md-12">
+<div class="col-md-12" style="margin-top: 3px;">
 
     <div class="col-md-3" style="background-color: #f5f7f5;">
 
         @using (Html.BeginForm("TimPhongTrong", "Home"))
         {
             <div class="form-horizontal">
+
                 <div class="form-group">
                     <div class="col-md-6">
-                        <label for="date_start" style="font-size: 22px;">Ngày vào</label>
+                        <label for="date_start" style="font-size: 22px; font-weight: bold;">Ngày nhận phòng</label>
                         @Html.TextBox("datestart", null, new { @class = "form-control" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-6">
-                        <label for="date_end" style="font-size: 22px;">Ngày ra</label>
+                        <label for="date_end" style="font-size: 22px;">Ngày trả phòng</label>
                         @Html.TextBox("dateend", null, new { @class = "form-control" })
                     </div>
                 </div>

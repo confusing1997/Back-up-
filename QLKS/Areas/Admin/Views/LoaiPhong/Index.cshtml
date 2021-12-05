@@ -10,60 +10,58 @@
 </div>
 
 <div >
-    <div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        STT
-                    </th>
-                    <th>Mô tả</th>
-                    <th>
-                        Số giường
-                    </th>
-                    <th>
-                        Đơn giá/ VNĐ
-                    </th>
-                    <th>
-                       Phí phát sinh
-                    </th>
-                    <th>
-                        Thao tác
-                    </th>
-                </tr>
-            </thead>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    STT
+                </th>
+                <th>Mô tả</th>
+                <th>
+                    Số giường
+                </th>
+                <th>
+                    Đơn giá/ VNĐ
+                </th>
+                <th>
+                    Phí phát sinh
+                </th>
+                <th>
+                    Thao tác
+                </th>
+            </tr>
+        </thead>
 
-            <tbody>
-                @{ 
-                    int stt = 0;
-                }
-                @foreach (var item in Model)
-                {
-                    stt++;
-                <tr>
-                    <td>
-                        @stt
-                    </td> 
-                    <td>
-                        <img src="@Html.DisplayFor(modelItem => item.anh)" width="80px" height="50px" />
-                    </td>
+        <tbody>
+            @{ 
+                int stt = 0;
+            }
+            @foreach (var item in Model)
+            {
+                stt++;
+            <tr>
+                <td>
+                    @stt
+                </td> 
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.anh)" width="80px" height="50px" />
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mo_ta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.gia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ti_le_phu_thu)%
-                    </td>
-                    <td>
-                        @Html.ActionLink("Chỉnh sửa", "SuaLoaiPhong", new { id = item.loai_phong }, new { @class="btn btn-primary" })
-                    </td>
-
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mo_ta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ti_le_phu_thu)%
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh sửa thông tin", "SuaLoaiPhong", 
+                    new { id = item.loai_phong }, new { @class="btn btn-primary" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>

@@ -54,10 +54,29 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                <input type="submit"
+                       onclick="return checkLoaiPhong()"
+                       value="Xác nhận" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
+
+
+<script>
+    function checkLoaiPhong()
+    {
+        var mo_ta = $("#mo_ta").val();
+        var gia = $("#gia").val();
+        var ti_le_phu_thu = $("#ti_le_phu_thu").val();
+        var ImageFile = $("#ImageFile").val();
+
+        if (mo_ta == "" || gia == "" || ti_le_phu_thu == "" || ImageFile == "")
+        {
+            return false;
+        }
+        return true;
+    }
+</script>
 
 

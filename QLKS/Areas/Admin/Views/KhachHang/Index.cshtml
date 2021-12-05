@@ -9,53 +9,48 @@
     <div>Danh sách khách hàng</div>
 </div>
 
-
-
 <div>
-    
-    <div>
-        <div>
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        STT
-                    </th>
-                    <th>
-                        Họ tên khách hàng
-                    </th>
+    <table class="table table-bordered">
+
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Họ tên khách hàng
+            </th>
                     
-                    <th>
-                        Số điện thoại
-                    </th>
-                    <th>
-                        Địa chỉ email
-                    </th>
-                </tr>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Địa chỉ email
+            </th>
+        </tr>
 
-                @{ 
-                        int stt = 0;
-                }
-                @foreach (var item in Model)
-                {
-                    stt++;
+        @{ 
+                int stt = 0;
+        }
 
-                    <tr>
-                        <td>
-                            @stt
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ho_ten)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.sdt)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.mail)
-                        </td>
-                    </tr>
-                }
+        @foreach (var item in Model)
+        {
+            stt++;
 
-            </table>
-        </div>
-    </div>
+            <tr>
+                <td>
+                    @stt
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ho_ten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mail)
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>

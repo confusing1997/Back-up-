@@ -74,25 +74,16 @@
     }
 </div>
 <script>
+
     function checkInfo() {
+
         var ten = $('#ten_dv').val();
         var gia = $('#gia').val();
         var soluong = $('#ton_kho').val();
         var donvi = $('#don_vi').val();
-        
-        if (ten == '') {
+
+        if (ten == "" || gia == "" || donvi == "" || soluong == "") {
             alert('Thông tin dịch vụ không được để trống !');
-            return false;
-        }
-        if (gia == '') {
-            alert('Đơn giá không được để trống !');
-            return false;
-        if (donvi == '') {
-            alert('Đơn vị tính không được để trống !');
-            return false;
-        }
-        if (soluong == '') {
-            alert('Đang phục vụ không được để trống !');
             return false;
         }
         return true;

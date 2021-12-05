@@ -49,7 +49,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Xác nhận" class="btn btn-primary" />
+                <input type="submit" value="Xác nhận" 
+                       onclick="return checkPhong()" 
+                       class="btn btn-primary" />
             </div>
         </div>
 
@@ -59,6 +61,25 @@
             </div>
         </div>
     </div>
+
+    
 }
+
+<script>
+
+    function checkPhong() {
+
+        var so_phong = $("#so_phong").val();
+        var loai_phong = $("#loai_phong").val();
+        var ma_tang = $("#ma_tang").val();
+
+        if (so_phong == "" || loai_phong == "" || ma_tang == "") {
+            return false;
+        }
+        return true;
+
+    }
+
+</script>
 
 

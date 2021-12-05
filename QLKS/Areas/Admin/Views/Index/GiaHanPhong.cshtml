@@ -55,7 +55,7 @@
         var ngayVao = new Date(ngay_vao);
         var ngay_ra = $("#ngay_ra").val();
         var ngayRa = new Date(ngay_ra);
-        
+        ngayRa.setHours(0); ngayRa.setSeconds(0); ngayRa.setMinutes(0); ngayRa.setMilliseconds(0);
 
         var now = new Date();
         now.setHours(0);

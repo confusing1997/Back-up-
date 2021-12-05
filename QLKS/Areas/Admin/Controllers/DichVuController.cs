@@ -37,7 +37,13 @@ namespace QLKS.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (tblDichVu.ten_dv == null || tblDichVu.gia == null || tblDichVu.don_vi == null || tblDichVu.ton_kho == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 String anh = "/Content/Images/DichVu/default.png";
+
                 if (file != null)
                 {
                     string img = System.IO.Path.GetFileName(file.FileName);
@@ -68,7 +74,9 @@ namespace QLKS.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             tblDichVu tblDichVu = db.tblDichVus.Find(id);
+
             if (tblDichVu == null)
             {
                 return HttpNotFound();
@@ -87,6 +95,12 @@ namespace QLKS.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+
+                if (tblDichVu.ten_dv == null || tblDichVu.gia == null || tblDichVu.don_vi == null || tblDichVu.ton_kho == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 String anh = dv.anh;
 
                 if (file != null)

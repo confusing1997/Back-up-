@@ -40,6 +40,12 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                if (tblphong.so_phong == null || tblphong.loai_phong == null || tblphong.ma_tang == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+
                 if (db.tblPhongs.Where(a => a.so_phong.Equals(tblphong.so_phong)).FirstOrDefault() == null) 
                 {
                     db.tblPhongs.Add(tblphong);
@@ -125,6 +131,11 @@ namespace QLKS.Areas.Admin.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                if (tblphong.so_phong == null || tblphong.loai_phong == null || tblphong.ma_tang == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
                 if (db.tblPhongs.Where(a => a.so_phong.Equals(tblphong.so_phong)).FirstOrDefault() == null)
                 {
                     db.Entry(tblphong).State = EntityState.Modified;
